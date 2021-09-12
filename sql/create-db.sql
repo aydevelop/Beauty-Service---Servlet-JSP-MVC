@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS category
     name VARCHAR(40) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS service
+CREATE TABLE IF NOT EXISTS `service`
 (
     id             INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name_ua        VARCHAR(40)    NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS service
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS user_service
+CREATE TABLE IF NOT EXISTS `user_service`
 (
     id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     master_id  INT NOT NULL,
@@ -48,18 +48,18 @@ CREATE TABLE IF NOT EXISTS user_service
 
 CREATE TABLE IF NOT EXISTS `order`
 (
-    `id`              INT                                        NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `data_time`       DATETIME                                   NOT NULL,
-    `status`          ENUM ('is_paid', 'is_canceled', 'is_done') NOT NULL,
-    `feedback_text`   VARCHAR(200)                               NULL,
-    `feedback_rating` INT                                        NULL,
-    `user_service_id` INT                                        NOT NULL,
-    `client_id`       INT                                        NOT NULL,
+    id              INT                                        NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    data_time       DATETIME                                   NOT NULL,
+    status          ENUM ('is_paid', 'is_canceled', 'is_done') NOT NULL,
+    feedback_text   VARCHAR(200)                               NULL,
+    feedback_rating INT                                        NULL,
+    user_service_id INT                                        NOT NULL,
+    client_id       INT                                        NOT NULL,
     FOREIGN KEY (client_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (user_service_id) REFERENCES user_service (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-INSERT INTO `category` (`id`, `name`)
+INSERT INTO category (id, name)
 VALUES (1, 'Перукарські послуги'),
        (2, 'Манікюр та педикюр'),
        (3, 'Послуги косметолога'),
@@ -68,20 +68,20 @@ VALUES (1, 'Перукарські послуги'),
        (6, 'Тату / татуаж / боді арт хною'),
        (7, 'Масаж та СПА');
 
-INSERT INTO `role` (`id`, `name`)
+INSERT INTO role (id, name)
 VALUES (1, 'Гість'),
        (2, 'Клієнт'),
        (3, 'Адміністратор'),
        (4, 'Майстер');
 
-INSERT INTO `service` (`id`, `name_ua`, `name_en`, `price`, `image`, `description_ua`, `description_en`, `category_id`)
+INSERT INTO service (id, name_ua, name_en, price, image, description_ua, description_en, category_id)
 VALUES (1, 'Освітлення коренів', 'Освітлення коренів', 111.00, '111', 'Освітлення коренів', 'Освітлення коренів', 1),
        (2, ' Манікюр європейський необрізний', ' Манікюр європейський необрізний', 111.00, '111',
         ' Манікюр європейський необрізний', ' Манікюр європейський необрізний', 2),
        (3, 'Нарощуваня вій (об’єм 2D)', 'Нарощуваня вій (об’єм 2D)', 111.00, '111', 'Нарощуваня вій (об’єм 2D)',
         'Нарощуваня вій (об’єм 2D)', 5);
 
-INSERT INTO `user` (`id`, `email`, `password`, `first_name`, `last_name`, `role_id`)
+INSERT INTO user (id, email, password, first_name, last_name, role_id)
 VALUES (1, 'kbartelli2@wufoo.com', '123', 'Kamila', 'Bartelli', 1),
        (2, 'hbridsonp@adobe.com', '123', 'Hally', 'Bridson', 2),
        (3, 'jbisco16@boston.com', '123', 'Barbi', 'Vasilik', 3),
@@ -96,7 +96,7 @@ VALUES (1, 'kbartelli2@wufoo.com', '123', 'Kamila', 'Bartelli', 1),
        (12, 'omaymond@etsy.com', '123', 'Othelia', 'Maymond', 4);
 
 
-INSERT INTO `user_service` (`id`, `master_id`, `service_id`)
+INSERT INTO user_service (id, master_id, service_id)
 VALUES (1, 4, 2),
        (2, 9, 1),
        (3, 12, 3);

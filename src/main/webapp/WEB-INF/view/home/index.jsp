@@ -58,7 +58,7 @@
 </div>
 <div style="text-align: right; margin-right: 10%; font-size: 22px">
     Order By:
-    <select style="height: 30px">
+    <select id="master_select" style="height: 30px">
         <option value="name">Name</option>
         <option value="rating">Rating</option>
     </select>

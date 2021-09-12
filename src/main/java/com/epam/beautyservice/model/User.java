@@ -7,6 +7,7 @@ public class User extends Entity {
     private String first_name;
     private String last_name;
     private int role_id;
+    private int rating;
 
     public String getEmail() {
         return email;
@@ -18,6 +19,14 @@ public class User extends Entity {
 
     public String getPassword() {
         return password;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public void setPassword(String password) {
