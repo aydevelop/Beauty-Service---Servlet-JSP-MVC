@@ -1,1 +1,7 @@
+com\epam\beautyservice\database\CategoryDao.class
+com\epam\beautyservice\database\base\UnitOfWork.class
+com\epam\beautyservice\database\OrderDao.class
+com\epam\beautyservice\database\base\GeneralDao.class
 com\epam\beautyservice\database\UserDao.class
+com\epam\beautyservice\controller\Action.class
+com\epam\beautyservice\database\base\DBManager.class

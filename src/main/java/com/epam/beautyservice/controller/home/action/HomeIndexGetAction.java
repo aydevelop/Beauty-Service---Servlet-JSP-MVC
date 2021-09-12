@@ -1,9 +1,6 @@
 package com.epam.beautyservice.controller.home.action;
 
 import com.epam.beautyservice.controller.Action;
-import com.epam.beautyservice.database.CategoryDao;
-import com.epam.beautyservice.database.ServiceDao;
-import com.epam.beautyservice.database.UserDao;
 import com.epam.beautyservice.model.Category;
 import com.epam.beautyservice.model.Service;
 import com.epam.beautyservice.model.User;
@@ -26,12 +23,12 @@ public class HomeIndexGetAction implements Action {
 
     @Override
     public void execute() {
-        List<Category> categories = new CategoryDao().queryAll();
+        List<Category> categories = db.getCategories().queryAll();
         request.setAttribute("categories", categories);
 
         //List<User> masters = new UserDao().queryMaster();
-        List<User> masters = new UserDao().queryAllWithRating();
-        List<Service> services = new ServiceDao().queryAll();
+        List<User> masters = db.getUsers().queryAllWithRating();
+        List<Service> services = db.getServices().queryAll();
 
 
         Cookie[] cookies = request.getCookies();

@@ -14,7 +14,7 @@
 <div class="body-wrapper">
     <div class="content">
         <div class="title" style="text-align: left; position:relative;">
-            BeautyService
+            <a href="/">BeautyService</a>
             <div style="position: absolute; right: 0px; top: 13px; font-size: 18px; font-weight: bold">
                 <a href="/admin" style="margin-right: 20px">Administrator</a>
                 <a href="#" style="margin-right: 20px">Login</a>

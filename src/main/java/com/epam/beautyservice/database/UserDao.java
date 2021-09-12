@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.User;
 
 import java.sql.Connection;
@@ -13,17 +14,19 @@ public class UserDao implements GeneralDao<User> {
     private static final String SQL_READ_All = "SELECT * FROM user";
     private static final String SQL_READ = "SELECT * FROM user WHERE id=?";
     private static final String SQL_READ_MASTER = "SELECT * FROM user WHERE role_id=4";
-    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user" +
-            " LEFT JOIN user_service ON user_service.master_id = user.id" +
-            " LEFT JOIN `order` AS ord ON ord.user_service_id = user_service.id ";
+//    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user" +
+//            " LEFT JOIN user_service ON user_service.master_id = user.id" +
+//            " LEFT JOIN `order` AS ord ON ord.user_service_id = user_service.id ";
+
+    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user";
 
     @Override
-    public List<User> queryAll() {
+    public List<User> query(String sql) {
         List<User> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL_READ_All);
+            ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 list.add(getUser(rs));
@@ -33,6 +36,11 @@ public class UserDao implements GeneralDao<User> {
         }
 
         return list;
+    }
+
+
+    public List<User> queryAll() {
+        return query(SQL_READ_MASTER);
     }
 
     @Override
@@ -51,37 +59,11 @@ public class UserDao implements GeneralDao<User> {
     }
 
     public List<User> queryMaster() {
-        List<User> list = new ArrayList<>();
-
-        try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL_READ_MASTER);
-
-            while (rs.next()) {
-                list.add(getUser(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return list;
+        return query(SQL_READ_All);
     }
 
     public List<User> queryAllWithRating() {
-        List<User> list = new ArrayList<>();
-
-        try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL_READ_WITH_RATING);
-
-            while (rs.next()) {
-                list.add(getUser(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return list;
+        return query(SQL_READ_WITH_RATING);
     }
 
     private User getUser(ResultSet rs) throws SQLException {
@@ -92,9 +74,7 @@ public class UserDao implements GeneralDao<User> {
         item.setFirst_name(rs.getString("first_name"));
         item.setLast_name(rs.getString("last_name"));
         item.setRole_id(rs.getInt("role_id"));
-        item.setRating(rs.getInt("feedback_rating"));
+        item.setRating(5);
         return item;
     }
-
-
 }

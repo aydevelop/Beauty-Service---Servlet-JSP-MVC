@@ -1,4 +1,4 @@
-package com.epam.beautyservice.database;
+package com.epam.beautyservice.database.base;
 
 
 import org.apache.log4j.Logger;
@@ -22,8 +22,9 @@ public class DBManager {
     private static DBManager instance;
 
     public static synchronized DBManager getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new DBManager();
+        }
         return instance;
     }
 

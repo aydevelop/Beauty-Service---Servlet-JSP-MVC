@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.Category;
 
 import java.sql.Connection;
@@ -14,12 +15,12 @@ public class CategoryDao implements GeneralDao<Category> {
     private final String SQL_READ_BY_ID = "SELECT * FROM category WHERE id=?";
 
     @Override
-    public List<Category> queryAll() {
+    public List<Category> query(String sql) {
         List<Category> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL_READ_All);
+            ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 list.add(getCategory(rs));
@@ -29,6 +30,11 @@ public class CategoryDao implements GeneralDao<Category> {
         }
 
         return list;
+    }
+
+
+    public List<Category> queryAll() {
+        return query(SQL_READ_All);
     }
 
     @Override

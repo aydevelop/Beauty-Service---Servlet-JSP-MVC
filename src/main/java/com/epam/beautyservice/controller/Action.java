@@ -1,5 +1,7 @@
 package com.epam.beautyservice.controller;
 
+import com.epam.beautyservice.database.base.UnitOfWork;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface Action {
-    void execute();
+    void execute() throws IOException;
+
+    UnitOfWork db = UnitOfWork.getInstance();
 
     default void view(String file, HttpServletRequest req, HttpServletResponse res) {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/" + file + ".jsp");

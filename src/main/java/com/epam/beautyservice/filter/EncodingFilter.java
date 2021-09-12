@@ -24,6 +24,6 @@ public class EncodingFilter implements Filter {
     public void init(FilterConfig fConfig) throws ServletException {
         ServletContext context = fConfig.getServletContext();
         encoding = context.getInitParameter("encoding");
-        contentType = context.getInitParameter("content-type");
+        //contentType = context.getInitParameter("content-type");
     }
 }

@@ -1,13 +1,16 @@
-package com.epam.beautyservice.database;
+package com.epam.beautyservice.database.base;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface GeneralDao<T> {
     final DBManager manager = DBManager.getInstance();
 
-    List<T> queryAll();
+    List<T> query(String sql);
 
     T findById(long id);
 
@@ -33,5 +36,24 @@ public interface GeneralDao<T> {
                 e.printStackTrace();
             }
         }
+    }
+
+    default boolean doesColumnExist(ResultSet rs, String... columns) throws SQLException {
+        List<String> all = new ArrayList<>();
+
+        ResultSetMetaData meta = rs.getMetaData();
+        int numCol = meta.getColumnCount();
+        for (int i = 1; i <= numCol; i++) {
+            all.add(meta.getColumnName(i));
+        }
+        
+
+        for (String item : columns) {
+            if (!all.contains(item)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

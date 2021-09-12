@@ -53,10 +53,12 @@ CREATE TABLE IF NOT EXISTS `order`
     status          ENUM ('is_paid', 'is_canceled', 'is_done') NOT NULL,
     feedback_text   VARCHAR(200)                               NULL,
     feedback_rating INT                                        NULL,
-    user_service_id INT                                        NOT NULL,
     client_id       INT                                        NOT NULL,
+    master_id       INT                                        NOT NULL,
+    service_id      INT                                        NOT NULL,
     FOREIGN KEY (client_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (user_service_id) REFERENCES user_service (id) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (master_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 INSERT INTO category (id, name)
@@ -100,3 +102,8 @@ INSERT INTO user_service (id, master_id, service_id)
 VALUES (1, 4, 2),
        (2, 9, 1),
        (3, 12, 3);
+
+INSERT INTO `order` (id, data_time, status, feedback_text, feedback_rating, client_id, master_id, service_id)
+VALUES (1, '2021-09-12 12:50:00', 'is_done', 'good', 5, 10, 7, 3),
+       (2, '2021-10-12 12:50:00', 'is_done', 'good', 5, 5, 7, 1),
+       (3, '2021-11-12 12:50:00', 'is_done', 'good', 5, 5, 7, 3);

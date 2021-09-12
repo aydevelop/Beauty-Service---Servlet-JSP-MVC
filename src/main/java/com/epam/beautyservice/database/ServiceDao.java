@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.Service;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class ServiceDao implements GeneralDao<Service> {
     private static final String SQL_READ_All_WITH_CATEGORY = "SELECT * FROM service JOIN category  ON service.category_id = category.id";
 
     @Override
-    public List<Service> queryAll() {
+    public List<Service> query(String sql) {
         List<Service> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
@@ -30,6 +31,10 @@ public class ServiceDao implements GeneralDao<Service> {
         }
 
         return list;
+    }
+
+    public List<Service> queryAll() {
+        return query(SQL_READ_All);
     }
 
     @Override
