@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.Order;
 import com.epam.beautyservice.model.Service;
@@ -20,8 +21,11 @@ public class OrderDao implements GeneralDao<Order> {
             " LEFT JOIN service ON service.id = `order`.service_id" +
             " LEFT JOIN category ON category.id = service.category_id";
 
+    private static final String SQL_EDIT = "UPDATE `order` SET data_time=?, status=?, feedback_text = ?, feedback_rating = ? where id=?";
+    private static final String SQL_CREATE = "INSERT INTO `order` (data_time, client_id, master_id, service_id) VALUES (?, ?, ?, ?)";
+
     @Override
-    public List<Order> query(String sql) {
+    public List<Order> query(String sql, ExtraMapper<Order> mapper) {
         List<Order> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
@@ -29,7 +33,11 @@ public class OrderDao implements GeneralDao<Order> {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                list.add(getOrder(rs));
+                Order order = getOrder(rs);
+                if (mapper != null) {
+                    mapper.map(order, rs);
+                }
+                list.add(order);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,11 +47,29 @@ public class OrderDao implements GeneralDao<Order> {
     }
 
     public List<Order> queryAll() {
-        return query(SQL_READ_All);
+        return query(SQL_READ_All, null);
     }
 
     public List<Order> queryAllWithUserService() {
-        return query(SQL_READ_All_WITH_USER_SERVICE);
+        return query(SQL_READ_All_WITH_USER_SERVICE, (order, rs) -> {
+            User client = new User();
+            client.setEmail(rs.getString(17));
+            client.setFirst_name(rs.getString(18));
+            client.setLast_name(rs.getString(19));
+            order.setClient(client);
+
+            User master = new User();
+            master.setEmail(rs.getString(20));
+            master.setFirst_name(rs.getString(21));
+            master.setLast_name(rs.getString(22));
+            order.setMaster(master);
+
+            Service service = new Service();
+            service.setName_ua(rs.getString(10));
+            service.setDescription_ua(rs.getString(14));
+            order.setService(service);
+            order.setCategory(rs.getString(24));
+        });
     }
 
     @Override
@@ -66,59 +92,50 @@ public class OrderDao implements GeneralDao<Order> {
     }
 
     @Override
-    public void create(Order element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void create(Order order) {
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_CREATE);
+            int k = 1;
+            pstmt.setString(k++, order.getDataTime());
+            pstmt.setInt(k++, order.getClientId());
+            pstmt.setInt(k++, order.getMasterId());
+            pstmt.setInt(k++, order.getServiceId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void edit(long id, Order element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void edit(long id, Order order) {
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_EDIT);
+            int k = 1;
+
+            pstmt.setString(k++, order.getDataTime());
+            pstmt.setString(k++, order.getStatus());
+            pstmt.setString(k++, order.getFeedbackText());
+            pstmt.setString(k++, order.getFeedbackRating());
+            pstmt.setLong(k++, order.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private Order getOrder(ResultSet rs) throws SQLException {
         Order order = new Order();
         try {
-
             order.setId(rs.getLong("id"));
-
             order.setDataTime(rs.getString("data_time"));
             order.setStatus(rs.getString("status"));
-
             order.setFeedbackText(rs.getString("feedback_text"));
             order.setFeedbackRating(rs.getString("feedback_rating"));
-
-            //boolean checkClient = doesColumnExist(rs, "client_email", "client_first_name", "client_last_name");
-            //if (checkClient) {
-            User client = new User();
-            client.setEmail(rs.getString(17));
-            client.setFirst_name(rs.getString(18));
-            client.setLast_name(rs.getString(19));
-            order.setClient(client);
-            //}
-
-            //boolean checkMaster = doesColumnExist(rs, "master_email", "master_first_name", "master_last_name");
-            //if (checkMaster) {
-            User master = new User();
-            master.setEmail(rs.getString(20));
-            master.setFirst_name(rs.getString(21));
-            master.setLast_name(rs.getString(22));
-            order.setMaster(master);
-            //}
-
-            //boolean checkService = doesColumnExist(rs, "name_ua", "description_ua");
-            //if (checkMaster) {
-            Service service = new Service();
-            service.setName_ua(rs.getString(10));
-            service.setDescription_ua(rs.getString(14));
-            order.setService(service);
-            order.setCategory(rs.getString(24));
-
-            int stop = 1010;
-            //}
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return order;
     }
 }

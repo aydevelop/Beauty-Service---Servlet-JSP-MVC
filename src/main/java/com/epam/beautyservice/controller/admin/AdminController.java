@@ -2,8 +2,8 @@ package com.epam.beautyservice.controller.admin;
 
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.admin.action.AdminIndexGetAction;
+import com.epam.beautyservice.controller.admin.action.AdminOrderEditPostAction;
 import com.epam.beautyservice.controller.admin.action.AdminOrderGetAction;
-import com.epam.beautyservice.controller.admin.action.AdminPostsPostAction;
 import com.epam.beautyservice.utils.Router;
 
 import javax.servlet.ServletException;
@@ -15,10 +15,11 @@ import java.io.IOException;
 
 @WebServlet("/admin/*")
 public class AdminController extends HttpServlet {
+    Action action = null;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
-        Action action = null;
 
         switch (path) {
             case "order":
@@ -28,22 +29,24 @@ public class AdminController extends HttpServlet {
                 action = new AdminIndexGetAction("admin/orders", request, response);
                 break;
         }
-
-        action.execute();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
-        Action action = null;
 
         switch (path) {
-            case "orders":
-                action = new AdminPostsPostAction(null, request, response);
+            case "order-edit":
+                action = new AdminOrderEditPostAction(null, request, response);
                 break;
             default:
                 response.sendRedirect("/admin");
         }
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
 
         if (action != null) {
             action.execute();

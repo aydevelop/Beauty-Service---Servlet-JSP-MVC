@@ -48,14 +48,14 @@ CREATE TABLE IF NOT EXISTS `user_service`
 
 CREATE TABLE IF NOT EXISTS `order`
 (
-    id              INT                                        NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    data_time       DATETIME                                   NOT NULL,
-    status          ENUM ('is_paid', 'is_canceled', 'is_done') NOT NULL,
-    feedback_text   VARCHAR(200)                               NULL,
-    feedback_rating INT                                        NULL,
-    client_id       INT                                        NOT NULL,
-    master_id       INT                                        NOT NULL,
-    service_id      INT                                        NOT NULL,
+    id              INT                                                  NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    data_time       DATETIME                                             NOT NULL,
+    status          ENUM ('is_new', 'is_paid', 'is_canceled', 'is_done') NOT NULL DEFAULT 'is_new',
+    feedback_text   VARCHAR(200)                                         NULL,
+    feedback_rating INT                                                  NULL,
+    client_id       INT                                                  NOT NULL,
+    master_id       INT                                                  NOT NULL,
+    service_id      INT                                                  NOT NULL,
     FOREIGN KEY (client_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (master_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE RESTRICT ON UPDATE CASCADE

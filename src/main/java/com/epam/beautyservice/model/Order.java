@@ -6,12 +6,22 @@ public class Order extends Entity {
     private String status;
     private String feedbackText;
     private String feedbackRating;
-    private int serviceId;
-    private int clientId;
     private String category;
 
+    private int clientId;
     private User client;
+    private int masterId;
     private User master;
+    private int serviceId;
+
+    public int getMasterId() {
+        return masterId;
+    }
+
+    public void setMasterId(int masterId) {
+        this.masterId = masterId;
+    }
+
     private Service service;
 
     public String getCategory() {

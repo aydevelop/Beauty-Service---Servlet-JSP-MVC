@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.User;
 
@@ -21,7 +22,7 @@ public class UserDao implements GeneralDao<User> {
     private static final String SQL_READ_WITH_RATING = "SELECT * FROM user";
 
     @Override
-    public List<User> query(String sql) {
+    public List<User> query(String sql, ExtraMapper<User> mapper) {
         List<User> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
@@ -29,7 +30,11 @@ public class UserDao implements GeneralDao<User> {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                list.add(getUser(rs));
+                User user = getUser(rs);
+                if (mapper != null) {
+                    mapper.map(user, rs);
+                }
+                list.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,7 +45,7 @@ public class UserDao implements GeneralDao<User> {
 
 
     public List<User> queryAll() {
-        return query(SQL_READ_MASTER);
+        return query(SQL_READ_MASTER, null);
     }
 
     @Override
@@ -59,11 +64,11 @@ public class UserDao implements GeneralDao<User> {
     }
 
     public List<User> queryMaster() {
-        return query(SQL_READ_All);
+        return query(SQL_READ_All, null);
     }
 
     public List<User> queryAllWithRating() {
-        return query(SQL_READ_WITH_RATING);
+        return query(SQL_READ_WITH_RATING, null);
     }
 
     private User getUser(ResultSet rs) throws SQLException {

@@ -1,5 +1,6 @@
 package com.epam.beautyservice.database;
 
+import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.Category;
 
@@ -15,7 +16,7 @@ public class CategoryDao implements GeneralDao<Category> {
     private final String SQL_READ_BY_ID = "SELECT * FROM category WHERE id=?";
 
     @Override
-    public List<Category> query(String sql) {
+    public List<Category> query(String sql, ExtraMapper<Category> mapper) {
         List<Category> list = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
@@ -23,7 +24,11 @@ public class CategoryDao implements GeneralDao<Category> {
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                list.add(getCategory(rs));
+                Category category = getCategory(rs);
+                if (mapper != null) {
+                    mapper.map(category, rs);
+                }
+                list.add(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,7 +39,7 @@ public class CategoryDao implements GeneralDao<Category> {
 
 
     public List<Category> queryAll() {
-        return query(SQL_READ_All);
+        return query(SQL_READ_All, null);
     }
 
     @Override

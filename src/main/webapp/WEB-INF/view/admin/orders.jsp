@@ -3,13 +3,14 @@
     <jsp:param name="title" value="All Orders"/>
 </jsp:include>
 
-<form action="/admin/orders" method="post">
+<form action="/admin/orders2" method="post">
     <div style="margin-bottom: 50px">
         <h1>Administrator .....</h1>
     </div>
     <div>
         <table cellspacing="20">
             <tr>
+                <th width="100px">date-time</th>
                 <th>status</th>
                 <th>name_ua</th>
                 <th>description_ua</th>
@@ -22,6 +23,7 @@
             </tr>
             <c:forEach items="${orders}" var="order">
                 <tr>
+                    <td>${order.dataTime}</td>
                     <td width="80">
                         <c:choose>
                             <c:when test="${order.status == 'is_canceled'}">
@@ -62,7 +64,7 @@
                     <td>${order.client.email}</td>
                     <td>${order.master.first_name} ${order.master.last_name}</td>
                     <td>${order.master.email}</td>
-                    <td><a href="admin/order?id=${order.id}">EDIT</a></td>
+                    <td><a href="/admin/order?id=${order.id}"><b>EDIT</b></a></td>
                 </tr>
             </c:forEach>
         </table>

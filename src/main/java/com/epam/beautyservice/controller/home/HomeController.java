@@ -13,23 +13,25 @@ import java.io.IOException;
 
 @WebServlet("/home/*")
 public class HomeController extends HttpServlet {
+    Action action = null;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
-        Action action = null;
 
         switch (path) {
             default:
                 action = new HomeIndexGetAction("home/index", request, response);
                 break;
         }
-
-
-        action.execute();
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
 
+        if (action != null) {
+            action.execute();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.beautyservice.controller.home.action;
 
 import com.epam.beautyservice.controller.Action;
+import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Category;
 import com.epam.beautyservice.model.Service;
 import com.epam.beautyservice.model.User;
@@ -10,15 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class HomeIndexGetAction implements Action {
-    private final String view;
-    private final HttpServletRequest request;
-    private final HttpServletResponse response;
-
+public class HomeIndexGetAction extends Base implements Action {
     public HomeIndexGetAction(String view, HttpServletRequest request, HttpServletResponse response) {
-        this.view = view;
-        this.request = request;
-        this.response = response;
+        super(view, request, response);
     }
 
     @Override

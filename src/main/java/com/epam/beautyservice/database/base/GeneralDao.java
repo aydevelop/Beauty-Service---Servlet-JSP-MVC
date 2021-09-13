@@ -10,7 +10,7 @@ import java.util.List;
 public interface GeneralDao<T> {
     final DBManager manager = DBManager.getInstance();
 
-    List<T> query(String sql);
+    List<T> query(String sql, ExtraMapper<T> mapper);
 
     T findById(long id);
 
@@ -46,7 +46,7 @@ public interface GeneralDao<T> {
         for (int i = 1; i <= numCol; i++) {
             all.add(meta.getColumnName(i));
         }
-        
+
 
         for (String item : columns) {
             if (!all.contains(item)) {

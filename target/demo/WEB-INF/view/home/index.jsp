@@ -48,7 +48,30 @@
             There are no services found.
         </c:if>
         <c:forEach items="${services}" var="service">
-            <div class="category-item">${service.name_en}</div>
+            <div class="category-item" style="position: relative">
+
+                <div>
+                        ${service.name_en}
+                </div>
+                <form method="post" action="/user/order-create">
+                    <input type="hidden" name="id" value="${service.id}">
+                    <div style="font-size: 22px; position: absolute; right: 5px; bottom: 5px">
+                        <select name="datatime" style="height: 25px; font-size: 20px; margin: 30px 20px 0px">
+                            <option>8:00</option>
+                            <option>9:00</option>
+                            <option>10:00</option>
+                            <option>11:00</option>
+                            <option>12:00</option>
+                            <option>13:00</option>
+                            <option>14:00</option>
+                            <option>15:00</option>
+                            <option>16:00</option>
+                            <option>17:00</option>
+                        </select>
+                        <button style="height: 30px" type="submit">Take service</button>
+                    </div>
+                </form>
+            </div>
         </c:forEach>
     </div>
 </div>
@@ -58,7 +81,7 @@
 </div>
 <div style="text-align: right; margin-right: 10%; font-size: 22px">
     Order By:
-    <select style="height: 30px">
+    <select id="master_select" style="height: 30px">
         <option value="name">Name</option>
         <option value="rating">Rating</option>
     </select>
