@@ -1,3 +1,4 @@
+<%@ include file="/WEB-INF/view/base.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,21 @@
 <div class="body-wrapper">
     <div class="content">
         <div class="title" style="text-align: left; position:relative;">
-            <a href="/">BeautyService</a>
+            <a href="/">BeautyService!!!</a>
             <div style="position: absolute; right: 0px; top: 13px; font-size: 18px; font-weight: bold">
-                <a href="/master" style="margin-right: 20px">Master</a>
-                <a href="/admin" style="margin-right: 20px">Administrator</a>
-                <a href="#" style="margin-right: 20px">Login</a>
-                <a href="#">Registration</a>
+                <a href="/master" style="margin-right: 20px">
+                    <fmt:message key="home.master"/>
+                </a>
+                <a href="/admin" style="margin-right: 50px"><fmt:message key="home.administrator"/></a>
+                <%
+                    if (session.getAttribute("user") == null) {
+                %>
+                <a href="/auth/login" style="margin-right: 20px"><fmt:message key="home.login"/></a>
+                <a href="/auth/register"><fmt:message key="home.registration"/></a>
+                <% } else { %>
+                <b>${sessionScope.user.getEmail()}</b>
+                <a href="/auth/logout"><fmt:message key="home.logout"/></a>
+                <% }%>
             </div>
         </div>
         <div class="menu">
@@ -27,4 +37,6 @@
             <%--            <a href="#" class="menu__item">Masters</a>--%>
             <%--            <a href="#" class="menu__item">About Us</a>--%>
             ....................... Foto .......... Slider .......................
+            <%@include file="lang.jsp" %>
+            <span>${defaultLocale}</span>
         </div>

@@ -8,6 +8,25 @@ public class User extends Entity {
     private String last_name;
     private int role_id;
     private int rating;
+    private String lang;
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
 
     public String getEmail() {
         return email;

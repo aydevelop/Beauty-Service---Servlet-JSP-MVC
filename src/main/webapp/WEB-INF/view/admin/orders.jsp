@@ -64,7 +64,7 @@
                     <td>${order.client.email}</td>
                     <td>${order.master.first_name} ${order.master.last_name}</td>
                     <td>${order.master.email}</td>
-                    <td><a href="/admin/order?id=${order.id}"><b>EDIT</b></a></td>
+                    <td><a href="/admin/order-edit?id=${order.id}"><b>EDIT</b></a></td>
                 </tr>
             </c:forEach>
         </table>

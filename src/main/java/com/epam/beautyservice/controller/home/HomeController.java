@@ -2,6 +2,7 @@ package com.epam.beautyservice.controller.home;
 
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.home.action.HomeIndexGetAction;
+import com.epam.beautyservice.controller.home.action.HomeLangChangeGetAction;
 import com.epam.beautyservice.utils.Router;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,9 @@ public class HomeController extends HttpServlet {
         String path = Router.parse(request.getPathInfo());
 
         switch (path) {
+            case "lang-change":
+                action = new HomeLangChangeGetAction(null, request, response);
+                break;
             default:
                 action = new HomeIndexGetAction("home/index", request, response);
                 break;

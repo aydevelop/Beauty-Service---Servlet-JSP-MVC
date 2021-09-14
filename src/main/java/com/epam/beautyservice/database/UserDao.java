@@ -4,22 +4,22 @@ import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements GeneralDao<User> {
     private static final String SQL_READ_All = "SELECT * FROM user";
     private static final String SQL_READ = "SELECT * FROM user WHERE id=?";
-    private static final String SQL_READ_MASTER = "SELECT * FROM user WHERE role_id=4";
+    private static final String SQL_READ_BY_EMAIL = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE email=?";
+    private static final String SQL_READ_MASTER = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE role.name = 'master'";
+    private static final String SQL_READ_MASTER_BY_SERVICE = "SELECT user.* FROM user_service LEFT JOIN user ON user.id = user_service.master_id WHERE user_service.service_id=?";
 //    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user" +
 //            " LEFT JOIN user_service ON user_service.master_id = user.id" +
 //            " LEFT JOIN `order` AS ord ON ord.user_service_id = user_service.id ";
 
     private static final String SQL_READ_WITH_RATING = "SELECT * FROM user";
+    private static final String SQL_EDIT_LANG = "UPDATE user SET lang=? where id=?";
 
     @Override
     public List<User> query(String sql, ExtraMapper<User> mapper) {
@@ -48,6 +48,24 @@ public class UserDao implements GeneralDao<User> {
         return query(SQL_READ_MASTER, null);
     }
 
+    public List<User> findAllByService(long id) {
+        List<User> users = new ArrayList<>();
+
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_READ_MASTER_BY_SERVICE);
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                users.add(getUser(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
     @Override
     public User findById(long id) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -63,8 +81,39 @@ public class UserDao implements GeneralDao<User> {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public void editLang(long id, String lang) {
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_EDIT_LANG);
+            pstmt.setString(1, lang);
+            pstmt.setLong(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<User> queryMaster() {
         return query(SQL_READ_All, null);
+    }
+
+    public User findUserByEmail(String email) {
+        User user = new User();
+
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_READ_BY_EMAIL);
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                user = getUser(rs);
+                user.setRole(rs.getString(8));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
     public List<User> queryAllWithRating() {
@@ -79,6 +128,7 @@ public class UserDao implements GeneralDao<User> {
         item.setFirst_name(rs.getString("first_name"));
         item.setLast_name(rs.getString("last_name"));
         item.setRole_id(rs.getInt("role_id"));
+        item.setLang(rs.getString("lang"));
         item.setRating(5);
         return item;
     }

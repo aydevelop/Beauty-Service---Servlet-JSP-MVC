@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS user
     first_name VARCHAR(20)  NOT NULL,
     last_name  VARCHAR(20)  NOT NULL,
     role_id    INT          NOT NULL,
+    lang       VARCHAR(10)  NULL,
     FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -101,7 +102,10 @@ VALUES (1, 'kbartelli2@wufoo.com', '123', 'Kamila', 'Bartelli', 1),
 INSERT INTO user_service (id, master_id, service_id)
 VALUES (1, 4, 2),
        (2, 9, 1),
-       (3, 12, 3);
+       (3, 3, 3),
+       (4, 5, 3),
+       (5, 3, 3),
+       (6, 6, 3);
 
 INSERT INTO `order` (id, data_time, status, feedback_text, feedback_rating, client_id, master_id, service_id)
 VALUES (1, '2021-09-12 12:50:00', 'is_done', 'good', 5, 10, 7, 3),

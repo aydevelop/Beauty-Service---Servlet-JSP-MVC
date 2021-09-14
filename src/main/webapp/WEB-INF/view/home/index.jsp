@@ -4,12 +4,12 @@
 </jsp:include>
 
 <div style="margin-top: 30px; margin-left: 40px; text-align: left; font-weight: normal; font-size: 30px">
-    <div>Services</div>
+    <div><fmt:message key="home.services"/></div>
 </div>
 <div style="display: flex; flex-direction: row">
     <div class="filters"
          style="width: 340px; border: 1px solid black; margin-right: 20px; padding-left: 20px; padding-right: 10px; padding-top:20px; margin-top: 10px">
-        Categories:
+        <fmt:message key="home.categories"/>
         <div>
             <c:forEach items="${categories}" var="category">
                 <div style="margin-top: 10px; cursor: pointer">
@@ -25,7 +25,7 @@
             </c:forEach>
         </div>
         <br/>
-        Masters:
+        <fmt:message key="home.masters"/>
         <div>
             <c:forEach items="${masters}" var="master">
                 <div style="margin-top: 10px">
@@ -53,31 +53,33 @@
                 <div>
                         ${service.name_en}
                 </div>
-                <form method="post" action="/user/order-create">
-                    <input type="hidden" name="id" value="${service.id}">
-                    <div style="font-size: 22px; position: absolute; right: 5px; bottom: 5px">
-                        <select name="datetime" style="height: 25px; font-size: 20px; margin: 30px 20px 0px">
-                            <option>8:00</option>
-                            <option>9:00</option>
-                            <option>10:00</option>
-                            <option>11:00</option>
-                            <option>12:00</option>
-                            <option>13:00</option>
-                            <option>14:00</option>
-                            <option>15:00</option>
-                            <option>16:00</option>
-                            <option>17:00</option>
-                        </select>
-                        <button style="height: 30px" type="submit">Take service</button>
-                    </div>
-                </form>
+                    <%--                <form method="post" action="/user/order-create">--%>
+                    <%--                    <input type="hidden" name="id" value="${service.id}">--%>
+                    <%--                    <div style="font-size: 22px; position: absolute; right: 5px; bottom: 5px">--%>
+                    <%--                        <select name="datetime" style="height: 25px; font-size: 20px; margin: 30px 20px 0px">--%>
+                    <%--                            <option>8:00</option>--%>
+                    <%--                            <option>9:00</option>--%>
+                    <%--                            <option>10:00</option>--%>
+                    <%--                            <option>11:00</option>--%>
+                    <%--                            <option>12:00</option>--%>
+                    <%--                            <option>13:00</option>--%>
+                    <%--                            <option>14:00</option>--%>
+                    <%--                            <option>15:00</option>--%>
+                    <%--                            <option>16:00</option>--%>
+                    <%--                            <option>17:00</option>--%>
+                    <%--                        </select>--%>
+                    <%--                        <button style="height: 30px" type="submit">Take service</button>--%>
+                    <%--                    </div>--%>
+                    <%--                </form>--%>
+
+                <a href="/user/order-create?id=${service.id}">Take Service</a>
             </div>
         </c:forEach>
     </div>
 </div>
 
 <div style=" margin-left: 40px; margin-top: 30px; text-align: left; font-weight: normal; font-size: 30px; position: relative; bottom: -25px">
-    <div>Masters</div>
+    <div><fmt:message key="home.masters"/></div>
 </div>
 <div style="text-align: right; margin-right: 10%; font-size: 22px">
     Order By:

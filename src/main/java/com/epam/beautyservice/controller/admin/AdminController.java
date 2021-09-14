@@ -22,8 +22,8 @@ public class AdminController extends HttpServlet {
         String path = Router.parse(request.getPathInfo());
 
         switch (path) {
-            case "order":
-                action = new AdminOrderGetAction("admin/order", request, response);
+            case "order-edit":
+                action = new AdminOrderGetAction("admin/order-edit", request, response);
                 break;
             default:
                 action = new AdminIndexGetAction("admin/orders", request, response);

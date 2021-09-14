@@ -4,16 +4,14 @@ import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.Service;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceDao implements GeneralDao<Service> {
     private static final String SQL_READ_All = "SELECT * FROM service";
     private static final String SQL_READ = "SELECT * FROM service WHERE id=?";
+    private static final String SQL_READ_BY_ID = "SELECT * FROM service WHERE service.id = ?";
     private static final String SQL_READ_All_WITH_CATEGORY = "SELECT * FROM service JOIN category  ON service.category_id = category.id";
 
     @Override
@@ -44,7 +42,21 @@ public class ServiceDao implements GeneralDao<Service> {
 
     @Override
     public Service findById(long id) {
-        return null;
+        Service service = new Service();
+
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_READ_BY_ID);
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                service = getService(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return service;
     }
 
     @Override
