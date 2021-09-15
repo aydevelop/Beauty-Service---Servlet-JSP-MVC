@@ -1,7 +1,4 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
-    <jsp:param name="title" value="Index Home Title"/>
-</jsp:include>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="margin-top: 30px; margin-left: 40px; text-align: left; font-weight: normal; font-size: 30px">
     <div><fmt:message key="home.services"/></div>
@@ -51,7 +48,8 @@
             <div class="category-item" style="position: relative">
 
                 <div>
-                        ${service.name_en}
+                        ${service.getName(defaultLocale)}
+                    <%= new java.util.Date() %>
                 </div>
                     <%--                <form method="post" action="/user/order-create">--%>
                     <%--                    <input type="hidden" name="id" value="${service.id}">--%>
@@ -102,4 +100,4 @@
 
 </div>
 
-<%@include file="../footer.jsp" %>
+<%@include file="/WEB-INF/fragment/footer.jspf" %>

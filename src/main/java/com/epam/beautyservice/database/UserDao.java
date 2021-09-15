@@ -20,6 +20,7 @@ public class UserDao implements GeneralDao<User> {
 
     private static final String SQL_READ_WITH_RATING = "SELECT * FROM user";
     private static final String SQL_EDIT_LANG = "UPDATE user SET lang=? where id=?";
+    private static final String SQL_CREATE = "INSERT INTO user (email, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, 2)";
 
     @Override
     public List<User> query(String sql, ExtraMapper<User> mapper) {
@@ -72,8 +73,19 @@ public class UserDao implements GeneralDao<User> {
     }
 
     @Override
-    public void create(User element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void create(User user) {
+        try (Connection con = manager.getConnection()) {
+            Statement st = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(SQL_CREATE);
+            int k = 1;
+            pstmt.setString(k++, user.getEmail());
+            pstmt.setString(k++, user.getPassword());
+            pstmt.setString(k++, user.getFirst_name());
+            pstmt.setString(k++, user.getLast_name());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

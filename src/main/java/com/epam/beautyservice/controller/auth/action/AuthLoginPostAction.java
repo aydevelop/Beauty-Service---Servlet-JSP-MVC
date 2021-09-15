@@ -3,6 +3,8 @@ package com.epam.beautyservice.controller.auth.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.User;
+import com.epam.beautyservice.utils.Security;
+import com.epam.beautyservice.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,24 +19,39 @@ public class AuthLoginPostAction extends Base implements Action {
 
     @Override
     public void execute() throws IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        
         User user = db.getUsers().findUserByEmail(email);
+        HttpSession session = request.getSession();
+        session.setAttribute("loginEmail", email);
+        session.setAttribute("loginPassword", password);
 
-        if (user.getEmail() == null || !user.getPassword().equals(password)) {
-            request.getSession().setAttribute("error", "Email address or password is incorrect ");
+        Validator validator = new Validator();
+        validator.checkEmail(email);
+        validator.checkPassword(password);
+
+        String error = validator.getError();
+        if (error.length() > 0) {
+            session.setAttribute("error", error);
             redirect("/auth/login", request, response);
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            session.setAttribute("role", user.getRole());
-
-            if (user.getLang() != null) {
-                Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", user.getLang());
-                session.setAttribute("defaultLocale", user.getLang());
-            }
-
-            redirect("/home", request, response);
+            return;
         }
+
+        String hash = Security.getSHA512Password(password);
+        if (user.getEmail() == null || !user.getPassword().equals(hash)) {
+            session.setAttribute("error", "Email address or password is incorrect ");
+            redirect("/auth/login", request, response);
+            return;
+        }
+
+        session.setAttribute("user", user);
+        session.setAttribute("role", user.getRole());
+        if (user.getLang() != null) {
+            Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", user.getLang());
+            session.setAttribute("defaultLocale", user.getLang());
+        }
+
+        redirect("/home", request, response);
     }
 }

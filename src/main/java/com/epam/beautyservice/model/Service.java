@@ -65,4 +65,20 @@ public class Service extends Entity {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
+    public String getName(String defaultLocale) {
+        if (defaultLocale.equals("ua")) {
+            return name_ua;
+        }
+
+        return name_en;
+    }
+
+    public String getDescription(String defaultLocale) {
+        if (defaultLocale.equals("ua")) {
+            return description_ua;
+        }
+
+        return description_en;
+    }
 }

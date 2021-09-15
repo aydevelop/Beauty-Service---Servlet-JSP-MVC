@@ -105,8 +105,6 @@ public class OrderDao implements GeneralDao<Order> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        int stop = 0;
     }
 
     @Override

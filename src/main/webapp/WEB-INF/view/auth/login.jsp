@@ -1,7 +1,4 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
-    <jsp:param name="title" value="Login"/>
-</jsp:include>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <h1>Login</h1>
 <br/>
@@ -54,14 +51,11 @@
 <form method="post" action="/auth/login">
     <div class="container">
         <label>Email : </label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input type="text" placeholder="Enter Email" name="email" value="${sessionScope.loginEmail}" required>
         <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <input type="text" placeholder="Enter Password" name="password" value="${sessionScope.loginPassword}" required>
         <button type="submit">L o g i n</button>
-        <%--        <input type="checkbox" checked="checked"> Remember me--%>
-        <%--        <button type="button" class="cancelbtn"> Cancel</button>--%>
-        <%--        Forgot <a href="#"> password? </a>--%>
     </div>
 </form>
 
-<%@include file="../footer.jsp" %>
+<%@include file="../../fragment/footer.jspf" %>

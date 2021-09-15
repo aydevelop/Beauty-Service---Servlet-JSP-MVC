@@ -1,10 +1,7 @@
 package com.epam.beautyservice.controller.auth;
 
 import com.epam.beautyservice.controller.Action;
-import com.epam.beautyservice.controller.auth.action.AuthLoginGetAction;
-import com.epam.beautyservice.controller.auth.action.AuthLoginPostAction;
-import com.epam.beautyservice.controller.auth.action.AuthLogoutGetAction;
-import com.epam.beautyservice.controller.auth.action.AuthRegisterGetAction;
+import com.epam.beautyservice.controller.auth.action.*;
 import com.epam.beautyservice.utils.Router;
 
 import javax.servlet.ServletException;
@@ -23,14 +20,14 @@ public class AuthController extends HttpServlet {
         String path = Router.parse(request.getPathInfo());
 
         switch (path) {
-            case "login":
-                action = new AuthLoginGetAction("auth/login", request, response);
+            case "register":
+                action = new AuthRegisterGetAction("auth/register", request, response);
                 break;
             case "logout":
                 action = new AuthLogoutGetAction(null, request, response);
                 break;
             default:
-                action = new AuthRegisterGetAction("auth/register", request, response);
+                action = new AuthLoginGetAction("auth/login", request, response);
                 break;
         }
     }
@@ -42,6 +39,9 @@ public class AuthController extends HttpServlet {
         switch (path) {
             case "login":
                 action = new AuthLoginPostAction(null, request, response);
+                break;
+            case "register":
+                action = new AuthRegisterPostAction(null, request, response);
                 break;
             default:
                 response.sendRedirect("/login");

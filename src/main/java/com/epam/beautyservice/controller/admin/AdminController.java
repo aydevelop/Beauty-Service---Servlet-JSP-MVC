@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/admin/*")
+@WebServlet(value = "/admin/*")
 public class AdminController extends HttpServlet {
     Action action = null;
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
 

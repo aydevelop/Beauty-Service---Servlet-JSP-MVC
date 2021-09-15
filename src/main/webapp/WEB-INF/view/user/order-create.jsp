@@ -1,7 +1,5 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
-    <jsp:param name="title" value="Master Orders"/>
-</jsp:include>
+<%@ page import="com.epam.beautyservice.model.Service" %>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <form action="/user/order-create" method="post">
     <input type="hidden" name="service-id" value="${service.id}">
@@ -9,6 +7,10 @@
     <div>${service.name_ua}</div>
     <div>${service.price}</div>
     <div>${service.description_ua}</div>
+
+    <% Service service = (Service) request.getAttribute("service"); %>
+    <% String locale = (String) request.getSession().getAttribute("defaultLocale"); %>
+    <%= service.getName(locale) %>
 
     <br/>
     <hr>
@@ -25,4 +27,4 @@
     <button style="padding: 10px 40px" type="submit">Take Service</button>
 </form>
 
-<%@include file="../footer.jsp" %>
+<%@include file="../../fragment/footer.jspf" %>

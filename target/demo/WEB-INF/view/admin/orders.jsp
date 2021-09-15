@@ -1,7 +1,4 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
-    <jsp:param name="title" value="All Orders"/>
-</jsp:include>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <form action="/admin/orders2" method="post">
     <div style="margin-bottom: 50px">
@@ -73,4 +70,4 @@
     <%--    <button style="background-color: darksalmon; color: white; padding: 10px 50px">Save....</button>--%>
 </form>
 
-<%@include file="../footer.jsp" %>
+<%@include file="../../fragment/footer.jspf" %>

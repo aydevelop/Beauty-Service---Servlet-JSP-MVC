@@ -1,10 +1,8 @@
 package com.epam.beautyservice.filter;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter("/")
 public class EncodingFilter implements Filter {
     private String encoding;
     private String contentType;
@@ -18,6 +16,7 @@ public class EncodingFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         //response.setContentType(contentType);
+
         chain.doFilter(request, response);
     }
 

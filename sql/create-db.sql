@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS user
 (
     id         INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email      VARCHAR(40)  NOT NULL,
-    password   VARCHAR(100) NOT NULL,
+    password   VARCHAR(256) NOT NULL,
     first_name VARCHAR(20)  NOT NULL,
     last_name  VARCHAR(20)  NOT NULL,
     role_id    INT          NOT NULL,
@@ -84,19 +84,46 @@ VALUES (1, 'Освітлення коренів', 'Освітлення коре
        (3, 'Нарощуваня вій (об’єм 2D)', 'Нарощуваня вій (об’єм 2D)', 111.00, '111', 'Нарощуваня вій (об’єм 2D)',
         'Нарощуваня вій (об’єм 2D)', 5);
 
+/*
+    password=1234
+*/
 INSERT INTO user (id, email, password, first_name, last_name, role_id)
-VALUES (1, 'kbartelli2@wufoo.com', '123', 'Kamila', 'Bartelli', 1),
-       (2, 'hbridsonp@adobe.com', '123', 'Hally', 'Bridson', 2),
-       (3, 'jbisco16@boston.com', '123', 'Barbi', 'Vasilik', 3),
-       (4, 'cblakden@netlog.com', '123', 'Cristie', 'Blakden', 1),
-       (5, 'ltoppas1t@etsy.com', '123', 'Lorraine', 'Toppas', 2),
-       (6, 'vsoulsbya@slideshar', '123', 'Kitti', 'Mangenot', 3),
-       (7, 'jmurleys@1und1.de', '123', 'Siana', 'Kivelhan', 4),
-       (8, 'meckh2u@stanford.edu', '123', 'Malory', 'Eckh', 4),
-       (9, 'cfowdeny@nbcnews.com', '123', 'Colet', 'Fowden', 1),
-       (10, 'dvaunc@oracle.com', '123', 'Debbie', 'Vaun', 2),
-       (11, 'eikinv@spiegel.de', '123', 'Alyss', 'Tweedell', 3),
-       (12, 'omaymond@etsy.com', '123', 'Othelia', 'Maymond', 4);
+VALUES (1, 'kbartelli2@wufoo.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Kamila', 'Bartelli', 1),
+       (2, 'hbridsonp@adobe.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Hally', 'Bridson', 2),
+       (3, 'jbisco16@boston.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Barbi', 'Vasilik', 3),
+       (4, 'cblakden@netlog.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Cristie', 'Blakden', 1),
+       (5, 'ltoppas1t@etsy.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Lorraine', 'Toppas', 2),
+       (6, 'vsoulsbya@slideshar',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Kitti', 'Mangenot', 3),
+       (7, 'jmurleys@1und1.de',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Siana', 'Kivelhan', 4),
+       (8, 'meckh2u@stanford.edu',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Malory', 'Eckh', 4),
+       (9, 'cfowdeny@nbcnews.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Colet', 'Fowden', 1),
+       (10, 'dvaunc@oracle.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Debbie', 'Vaun', 2),
+       (11, 'eikinv@spiegel.de',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Alyss', 'Tweedell', 3),
+       (12, 'omaymond@etsy.com',
+        'b6bd34dbf7d1923ee81b3f04189fb29ae87fde7c1c5bd9de69c6baef57609250f12e8cd19239b33e79ae85c1ed59b188fbef5863f7f78296a29448d211eac6d7',
+        'Othelia', 'Maymond', 4);
 
 
 INSERT INTO user_service (id, master_id, service_id)

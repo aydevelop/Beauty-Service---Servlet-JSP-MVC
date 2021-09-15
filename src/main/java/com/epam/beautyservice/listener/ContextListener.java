@@ -36,14 +36,11 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
             if (locales.size() > 0) {
                 defaultLocale = locales.get(0);
             }
-
-
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-
     }
 
     @Override

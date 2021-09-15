@@ -1,5 +1,5 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
+<jsp:include page="../../fragment/header.jspf">
     <jsp:param name="title" value="Edit Order"/>
 </jsp:include>
 
@@ -51,4 +51,4 @@
     </div>
 </form>
 
-<%@include file="../footer.jsp" %>
+<%@include file="../../fragment/footer.jspf" %>
