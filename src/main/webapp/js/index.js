@@ -6,6 +6,39 @@ $(function () {
     // });
     //
     // $('#master_select').val("val2");
+
+    $('select#master_select').on('change', function () {
+        let value = this.value;
+        $.post("/home/master-sort?by=" + value, function (data, status) {
+            if (status == "success") {
+                $('#masters-list').html(data);
+            }
+        });
+    });
+
+    $('div#filters input').on('change', function () {
+        let categories = [];
+        let masters = [];
+
+        $('#filters #filter-category input:checked').each(function () {
+            categories.push($(this).attr('value'));
+        });
+
+        $('#filters #filter-master input:checked').each(function () {
+            masters.push($(this).attr('value'));
+        });
+
+
+        $.post("/home/service-sort", {
+            categories: categories.join(' '),
+            masters: masters.join(' ')
+        }, function (data, status) {
+            if (status == "success") {
+                $('#services-list').html(data);
+            }
+        });
+
+    });
 });
 
 function setCookie(name, value, days) {

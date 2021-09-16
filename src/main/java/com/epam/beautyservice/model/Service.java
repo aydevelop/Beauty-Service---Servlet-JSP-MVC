@@ -1,5 +1,9 @@
 package com.epam.beautyservice.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Service extends Entity {
     private static final long serialVersionUID = 5692708766041842896L;
     private String name_ua;
@@ -8,7 +12,21 @@ public class Service extends Entity {
     private String image;
     private String description_ua;
     private String description_en;
-    private int categoryId;
+    private String categoryId;
+    private String masterIds;
+
+
+    public List<String> getMasters() {
+        List<String> arr = new ArrayList<>();
+        if (masterIds != null) {
+            arr = Arrays.asList(masterIds.split(","));
+        }
+        return arr;
+    }
+
+    public void setMasterIds(String masterIds) {
+        this.masterIds = masterIds;
+    }
 
     public String getName_ua() {
         return name_ua;
@@ -58,11 +76,11 @@ public class Service extends Entity {
         this.description_en = description_en;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

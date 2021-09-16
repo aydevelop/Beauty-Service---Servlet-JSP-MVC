@@ -1,7 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<jsp:include page="../../fragment/header.jspf">
-    <jsp:param name="title" value="Edit Order"/>
-</jsp:include>
+<c:set var="title" value="Orders" scope="page"/>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <form action="/admin/orders2" method="post">
     <div style="margin-bottom: 50px">

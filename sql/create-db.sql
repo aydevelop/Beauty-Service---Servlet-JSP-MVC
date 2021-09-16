@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `service`
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `user_service`
+CREATE TABLE IF NOT EXISTS `master_service`
 (
     id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     master_id  INT NOT NULL,
@@ -78,11 +78,20 @@ VALUES (1, 'Гість'),
        (4, 'Майстер');
 
 INSERT INTO service (id, name_ua, name_en, price, image, description_ua, description_en, category_id)
-VALUES (1, 'Освітлення коренів', 'Освітлення коренів', 111.00, '111', 'Освітлення коренів', 'Освітлення коренів', 1),
-       (2, ' Манікюр європейський необрізний', ' Манікюр європейський необрізний', 111.00, '111',
-        ' Манікюр європейський необрізний', ' Манікюр європейський необрізний', 2),
-       (3, 'Нарощуваня вій (об’єм 2D)', 'Нарощуваня вій (об’єм 2D)', 111.00, '111', 'Нарощуваня вій (об’єм 2D)',
-        'Нарощуваня вій (об’єм 2D)', 5);
+VALUES (1, 'Освітлення коренів', 'Root lighting', 111.00, '111', 'Освітлення коренів ...........',
+        'Root lighting ............', 1),
+       (2, 'Манікюр європейський необрізний', 'European untrimmed manicure ', 111.00, '111',
+        'Манікюр європейський необрізний ..........', 'European untrimmed manicure ..........', 2),
+       (3, 'Нарощуваня вій (об’єм 2D)', 'Eyelash extensions (2D volume)', 111.00, '111',
+        'Нарощуваня вій (об’єм 2D) ..........', 'Eyelash extensions .....', 5),
+       (4, 'Покриття нігтів гелем + гель-лак', 'Covering nails with gel + gel varnish', 111.00, '111',
+        ' Покриття нігтів гелем + гель-лак ..........', 'Covering nails with gel + gel varnish .....', 2),
+       (5, 'Татуаж брів (класичний)', 'Eyebrow tattoo (classic)', 111.00, '111', 'Татуаж брів (класичний) ..........',
+        'Eyebrow tattoo (classic)  .....', 3),
+       (6, 'Корекція татуажу брів', 'Eyebrow tattoo correction ', 111.00, '111', 'Корекція татуажу брів ..........',
+        'Eyebrow tattoo correction  .....', 6),
+       (7, 'Зняття + нарощування волосся 1 прядка', 'Eyelash extensions (2D volume)', 111.00, '111',
+        'Зняття + нарощування волосся 1 прядка ..........', 'Eyelash extensions .....', 7);
 
 /*
     password=1234
@@ -126,7 +135,7 @@ VALUES (1, 'kbartelli2@wufoo.com',
         'Othelia', 'Maymond', 4);
 
 
-INSERT INTO user_service (id, master_id, service_id)
+INSERT INTO master_service (id, master_id, service_id)
 VALUES (1, 4, 2),
        (2, 9, 1),
        (3, 3, 3),

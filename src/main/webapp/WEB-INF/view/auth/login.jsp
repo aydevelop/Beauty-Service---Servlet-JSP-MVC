@@ -1,3 +1,5 @@
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
+<c:set var="title" value="Login" scope="page"/>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <h1>Login</h1>

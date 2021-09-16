@@ -6,6 +6,35 @@ $(function () {
     // });
     //
     // $('#master_select').val("val2");
+
+    $('select#master_select').on('change', function () {
+        let value = this.value;
+        $.post("/home/master-sort?by=" + value, function (data, status) {
+            if (status == "success") {
+                $('#masters-list').html(data);
+            }
+        });
+    });
+
+    $('div#filters input').on('change', function () {
+        let categories = [];
+        let services = [];
+
+        $('#filters #filter-category input:checked').each(function () {
+            categories.push($(this).attr('value'));
+        });
+
+        $('#filters #filter-master input:checked').each(function () {
+            services.push($(this).attr('value'));
+        });
+
+        $.post("/home/service-sort", {orderId: categories.toString()}, function (data, status) {
+            if (status == "success") {
+                alert("done....");
+            }
+        });
+
+    });
 });
 
 function setCookie(name, value, days) {

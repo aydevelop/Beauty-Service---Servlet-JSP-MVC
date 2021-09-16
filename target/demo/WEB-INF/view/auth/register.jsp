@@ -1,7 +1,6 @@
-<%@ include file="/WEB-INF/view/base.jspf" %>
-<jsp:include page="../header.jsp">
-    <jsp:param name="title" value="Register"/>
-</jsp:include>
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
+<c:set var="title" value="Register" scope="page"/>
+<%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <h1>Register</h1>
 <br/>
@@ -50,18 +49,17 @@
         background-color: lightblue;
     }
 </style>
-<form>
+<form method="post" action="/auth/register">
     <div class="container">
         <label>First Name : </label>
-        <input type="text" placeholder="First Name" name="first-name" required>
+        <input type="text" placeholder="First Name" name="first-name" value="${sessionScope.registerFirstName}"
+               required>
         <label>Email : </label>
-        <input type="text" placeholder="Last Name" name="last-name" required>
+        <input type="text" placeholder="Last Name" name="last-name" value="${sessionScope.registerLastName}" required>
         <label>Email : </label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input type="text" placeholder="Enter Email" name="email" value="${sessionScope.registerEmail}" required>
         <label>Password : </label>
         <input type="password" placeholder="Enter Password" name="password" required>
-        <label>Password Again : </label>
-        <input type="password" placeholder="Enter Password Again" name="password2" required>
         <button type="submit">R e g i s t e r</button>
         <%--        <input type="checkbox" checked="checked"> Remember me--%>
         <%--        <button type="button" class="cancelbtn"> Cancel</button>--%>
@@ -69,4 +67,4 @@
     </div>
 </form>
 
-<%@include file="../footer.jsp" %>
+<%@include file="../../fragment/footer.jspf" %>

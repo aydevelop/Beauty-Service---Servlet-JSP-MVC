@@ -1,3 +1,5 @@
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
+<c:set var="title" value="Master Page" scope="page"/>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="text-align: center">

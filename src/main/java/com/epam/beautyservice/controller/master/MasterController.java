@@ -37,6 +37,7 @@ public class MasterController extends HttpServlet {
                 break;
             default:
                 response.sendRedirect("/master");
+                break;
         }
     }
 

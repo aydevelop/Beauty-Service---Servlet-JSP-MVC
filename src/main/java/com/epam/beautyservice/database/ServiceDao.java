@@ -12,7 +12,10 @@ public class ServiceDao implements GeneralDao<Service> {
     private static final String SQL_READ_All = "SELECT * FROM service";
     private static final String SQL_READ = "SELECT * FROM service WHERE id=?";
     private static final String SQL_READ_BY_ID = "SELECT * FROM service WHERE service.id = ?";
-    private static final String SQL_READ_All_WITH_CATEGORY = "SELECT * FROM service JOIN category  ON service.category_id = category.id";
+    private static final String SQL_READ_All_WITH_MASTER_AND_CATEGORY = "SELECT service.*, category.name, GROUP_CONCAT(master_service.master_id) " +
+            " FROM service LEFT JOIN category ON service.category_id = category.id" +
+            " LEFT JOIN master_service ON master_service.service_id = service.id" +
+            " GROUP BY service.id";
 
     @Override
     public List<Service> query(String sql, ExtraMapper<Service> mapper) {
@@ -20,7 +23,7 @@ public class ServiceDao implements GeneralDao<Service> {
 
         try (Connection con = manager.getConnection()) {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(SQL_READ_All);
+            ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 Service service = getService(rs);
@@ -38,6 +41,13 @@ public class ServiceDao implements GeneralDao<Service> {
 
     public List<Service> queryAll() {
         return query(SQL_READ_All, null);
+    }
+
+    public List<Service> queryAllWithMasterAndCategory() {
+        return query(SQL_READ_All_WITH_MASTER_AND_CATEGORY, (service, st) -> {
+            service.setCategoryId(st.getString(8));
+            service.setMasterIds(st.getString(10));
+        });
     }
 
     @Override
@@ -78,7 +88,7 @@ public class ServiceDao implements GeneralDao<Service> {
         item.setImage(rs.getString("image"));
         item.setDescription_ua(rs.getString("description_ua"));
         item.setDescription_en(rs.getString("description_en"));
-        item.setCategoryId(rs.getInt("category_id"));
+        item.setCategoryId(rs.getString("category_id"));
         return item;
     }
 }

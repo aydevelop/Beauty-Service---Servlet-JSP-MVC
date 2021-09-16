@@ -18,7 +18,11 @@ public class UserDao implements GeneralDao<User> {
 //            " LEFT JOIN user_service ON user_service.master_id = user.id" +
 //            " LEFT JOIN `order` AS ord ON ord.user_service_id = user_service.id ";
 
-    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user";
+    private static final String SQL_READ_WITH_RATING = "SELECT user.*, SUM(`order`.feedback_rating) FROM user " +
+            "LEFT JOIN `order` ON `order`.master_id = user.id " +
+            "GROUP BY user.email " +
+            "ORDER BY `order`.feedback_rating DESC";
+    
     private static final String SQL_EDIT_LANG = "UPDATE user SET lang=? where id=?";
     private static final String SQL_CREATE = "INSERT INTO user (email, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, 2)";
 
@@ -129,7 +133,9 @@ public class UserDao implements GeneralDao<User> {
     }
 
     public List<User> queryAllWithRating() {
-        return query(SQL_READ_WITH_RATING, null);
+        return query(SQL_READ_WITH_RATING, (user, rs) -> {
+            user.setRating(rs.getInt(8));
+        });
     }
 
     private User getUser(ResultSet rs) throws SQLException {

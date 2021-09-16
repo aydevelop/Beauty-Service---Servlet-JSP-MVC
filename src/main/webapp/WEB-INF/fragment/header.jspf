@@ -1,9 +1,8 @@
-<%@ include file="/WEB-INF/fragment/base.jspf" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta content='text/html; charset=UTF-8'>
-    <title>title</title>
+    <title>${title}</title>
     <link href="/css/index.css" rel="stylesheet">
     <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"

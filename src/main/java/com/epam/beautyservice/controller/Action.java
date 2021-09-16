@@ -9,7 +9,7 @@ import java.io.IOException;
 public interface Action {
     void execute() throws IOException;
 
-    
+
     default void view(String file, HttpServletRequest req, HttpServletResponse res) {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/view/" + file + ".jsp");
 
@@ -21,6 +21,19 @@ public interface Action {
             ex.printStackTrace();
         }
     }
+
+    default void fragment(String file, HttpServletRequest req, HttpServletResponse res) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/fragment/" + file + ".jsp");
+
+        try {
+            dispatcher.forward(req, res);
+        } catch (ServletException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     default void redirect(String file, HttpServletRequest req, HttpServletResponse res) {
         try {

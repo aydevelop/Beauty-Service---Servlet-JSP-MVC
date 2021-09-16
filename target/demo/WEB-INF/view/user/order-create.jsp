@@ -1,5 +1,8 @@
-<%@ page import="com.epam.beautyservice.model.Service" %>
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
+<c:set var="title" value="Order Create" scope="page"/>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
+<%@ page import="com.epam.beautyservice.model.Service" %>
+
 
 <form action="/user/order-create" method="post">
     <input type="hidden" name="service-id" value="${service.id}">
