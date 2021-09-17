@@ -9,7 +9,13 @@ public class Router {
         } else {
             result = url.replaceAll("(^/)|(/$)", "");
         }
-        
+
         return result;
+    }
+
+    public static String getSegment(String url) {
+        String segment = url.replaceAll("^.+\\/\\/.+?\\/", "");
+        segment = "/" + segment;
+        return segment;
     }
 }

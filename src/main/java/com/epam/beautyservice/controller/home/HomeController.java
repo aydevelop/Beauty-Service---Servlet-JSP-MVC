@@ -8,15 +8,13 @@ import com.epam.beautyservice.controller.home.action.HomeServiceSortPostAction;
 import com.epam.beautyservice.utils.Router;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(value = "/home/*", initParams = @WebInitParam(name = "A", value = "B"),
-        description = "D", displayName = "C", name = "N")
+@WebServlet(value = "/home/*")
 public class HomeController extends HttpServlet {
     Action action = null;
 

@@ -21,7 +21,7 @@ public class AuthLoginPostAction extends Base implements Action {
     public void execute() throws IOException {
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
-        
+
         User user = db.getUsers().findUserByEmail(email);
         HttpSession session = request.getSession();
         session.setAttribute("loginEmail", email);
@@ -51,6 +51,8 @@ public class AuthLoginPostAction extends Base implements Action {
             Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", user.getLang());
             session.setAttribute("defaultLocale", user.getLang());
         }
+
+        Object role = session.getAttribute("role");
 
         redirect("/home", request, response);
     }

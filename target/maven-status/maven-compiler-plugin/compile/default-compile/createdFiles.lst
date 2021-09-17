@@ -8,6 +8,7 @@ com\epam\beautyservice\database\base\ExtraMapper.class
 com\epam\beautyservice\database\CategoryDao.class
 com\epam\beautyservice\controller\master\MasterController.class
 com\epam\beautyservice\controller\admin\AdminController.class
+com\epam\beautyservice\filter\AccessFilter.class
 com\epam\beautyservice\controller\admin\action\AdminOrderEditPostAction.class
 com\epam\beautyservice\database\UserDao.class
 com\epam\beautyservice\controller\Action.class

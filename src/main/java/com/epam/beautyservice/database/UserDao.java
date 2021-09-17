@@ -22,7 +22,7 @@ public class UserDao implements GeneralDao<User> {
             "LEFT JOIN `order` ON `order`.master_id = user.id " +
             "GROUP BY user.email " +
             "ORDER BY `order`.feedback_rating DESC";
-    
+
     private static final String SQL_EDIT_LANG = "UPDATE user SET lang=? where id=?";
     private static final String SQL_CREATE = "INSERT INTO user (email, password, first_name, last_name, role_id) VALUES (?, ?, ?, ?, 2)";
 
@@ -123,7 +123,7 @@ public class UserDao implements GeneralDao<User> {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 user = getUser(rs);
-                user.setRole(rs.getString(8));
+                user.setRole(rs.getString(9));
             }
         } catch (SQLException e) {
             e.printStackTrace();

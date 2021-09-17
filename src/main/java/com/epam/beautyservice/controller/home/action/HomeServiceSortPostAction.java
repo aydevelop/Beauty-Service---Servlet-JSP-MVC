@@ -40,6 +40,30 @@ public class HomeServiceSortPostAction extends Base implements Action {
             }).collect(Collectors.toList());
         }
 
+        request.setAttribute("total", services.size());
+        //----------------------------------------------------------------------------
+        int recordsPerPage = 3;
+        int currentPage = 1;
+        if (request.getParameter("currentPage") != null) {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+        }
+
+        int size = services.size();
+        int nOfPages = services.size() / recordsPerPage;
+        if (nOfPages > 0 && size % nOfPages > 0) {
+            nOfPages++;
+        }
+
+        if (nOfPages == 0) {
+            nOfPages++;
+        }
+
+        request.setAttribute("noOfPages", nOfPages);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("recordsPerPage", recordsPerPage);
+        services = services.stream().skip((currentPage - 1) * recordsPerPage)
+                .limit(recordsPerPage).collect(Collectors.toList());
+        //----------------------------------------------------------------------------
 
         request.setAttribute("services", services);
         fragment("services", request, response);
