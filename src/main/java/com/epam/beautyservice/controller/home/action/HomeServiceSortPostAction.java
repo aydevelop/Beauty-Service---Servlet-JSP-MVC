@@ -3,6 +3,7 @@ package com.epam.beautyservice.controller.home.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Service;
+import com.epam.beautyservice.utils.Pagination;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,31 +41,8 @@ public class HomeServiceSortPostAction extends Base implements Action {
             }).collect(Collectors.toList());
         }
 
-        request.setAttribute("total", services.size());
-        //----------------------------------------------------------------------------
-        int recordsPerPage = 3;
-        int currentPage = 1;
-        if (request.getParameter("currentPage") != null) {
-            currentPage = Integer.parseInt(request.getParameter("currentPage"));
-        }
-
-        int size = services.size();
-        int nOfPages = services.size() / recordsPerPage;
-        if (nOfPages > 0 && size % nOfPages > 0) {
-            nOfPages++;
-        }
-
-        if (nOfPages == 0) {
-            nOfPages++;
-        }
-
-        request.setAttribute("noOfPages", nOfPages);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("recordsPerPage", recordsPerPage);
-        services = services.stream().skip((currentPage - 1) * recordsPerPage)
-                .limit(recordsPerPage).collect(Collectors.toList());
-        //----------------------------------------------------------------------------
-
+        ;
+        services = Pagination.Generation(request, services);
         request.setAttribute("services", services);
         fragment("services", request, response);
     }

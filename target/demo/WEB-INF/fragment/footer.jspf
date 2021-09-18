@@ -1,7 +1,12 @@
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
 </div>
 <div class="footer"
      style="border: 1px solid black; background-color: darksalmon; height: 40px; padding-top: 25px; font-size: 20px; margin-top: 20px">
-    footer
+    <div>
+        <t:fontstyle size="20" bold="false">Footer</t:fontstyle>
+    </div>
+   
 </div>
 
 <c:if test="${sessionScope.message != null}">

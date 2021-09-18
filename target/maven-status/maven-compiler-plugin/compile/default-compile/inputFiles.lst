@@ -10,12 +10,14 @@ C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Ent
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\action\AdminIndexGetAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\base\DBManager.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\filter\AccessFilter.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\HelloTag.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\OrderDao.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\auth\action\AuthLoginPostAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Order.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\Validator.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\AdminController.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\UserDao.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\Pagination.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\master\action\MasterOrderDonePostAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\base\UnitOfWork.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\base\GeneralDao.java

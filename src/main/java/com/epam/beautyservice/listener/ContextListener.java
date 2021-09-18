@@ -22,7 +22,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
-        String localesValue = servletContext.getInitParameter("locales");
+        String localesValue = servletContext.getInitParameter("Locales");
         if (localesValue != null && localesValue.isEmpty() == false) {
 
             List<String> locales = new ArrayList<String>();

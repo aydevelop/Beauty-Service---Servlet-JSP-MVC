@@ -1,12 +1,4 @@
 $(function () {
-    // setCookie("master_sort", "name", 10);
-    // $('select').on('change', function () {
-    //     setCookie("master_sort", this.value, 10);
-    //     //location.reload();
-    // });
-    //
-    // $('#master_select').val("val2");
-
     $('select#master_select').on('change', function () {
         let value = this.value;
         $.post("/home/master-sort?by=" + value, function (data, status) {
@@ -16,24 +8,12 @@ $(function () {
         });
     });
 
-    $('div#filters input').on('change', function () {
-        let categories = [];
-        let services = [];
+    $('body').on('change', '#filters input', function () {
+        filter();
+    });
 
-        $('#filters #filter-category input:checked').each(function () {
-            categories.push($(this).attr('value'));
-        });
-
-        $('#filters #filter-master input:checked').each(function () {
-            services.push($(this).attr('value'));
-        });
-
-        $.post("/home/service-sort", {orderId: categories.toString()}, function (data, status) {
-            if (status == "success") {
-                alert("done....");
-            }
-        });
-
+    $('body').on('change', '#recordsPerPage', function () {
+        filter();
     });
 });
 
@@ -56,4 +36,30 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
+}
+
+function filter(index) {
+    let categories = [];
+    let masters = [];
+
+    $('#filters #filter-category input:checked').each(function () {
+        categories.push($(this).attr('value'));
+    });
+
+    $('#filters #filter-master input:checked').each(function () {
+        masters.push($(this).attr('value'));
+    });
+
+    let recordsPerPage = $('#recordsPerPage').val();
+
+    $.post("/home/service-sort", {
+        categories: categories.join(' '),
+        masters: masters.join(' '),
+        currentPage: index,
+        recordsPerPage: recordsPerPage
+    }, function (data, status) {
+        if (status == "success") {
+            $('#services-list').html(data);
+        }
+    });
 }
