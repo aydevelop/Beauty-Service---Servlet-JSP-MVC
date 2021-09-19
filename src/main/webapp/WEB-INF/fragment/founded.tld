@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation=""
+        version="2.1">
+    <description>Founded Custom Tag</description>
+    <tlib-version>2.1</tlib-version>
+    <short-name>founded</short-name>
+    <uri>/WEB-INF/fragment/founded.tld</uri>
+    <tag>
+        <name>founded</name>
+        <tag-class>com.epam.beautyservice.utils.FoundedTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>year</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+</taglib>

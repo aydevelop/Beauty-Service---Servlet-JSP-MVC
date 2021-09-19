@@ -13,11 +13,11 @@
             <c:forEach items="${categories}" var="category">
                 <div style="margin-top: 10px; cursor: pointer">
                     <div>
-                        <input style="cursor: pointer" type="checkbox" id="ct-${category.name}"
+                        <input style="cursor: pointer" type="checkbox" id="ct-${category.name_ua}"
                                name="category-id"
                                value="${category.id}">
-                        <label for="ct-${category.name}" style="cursor: pointer; user-select: none;">
-                                ${category.name}
+                        <label for="ct-${category.name_ua}" style="cursor: pointer; user-select: none;">
+                                ${category.getName(defaultLocale)}
                         </label>
                     </div>
                 </div>

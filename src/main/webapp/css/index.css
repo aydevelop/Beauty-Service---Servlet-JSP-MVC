@@ -27,17 +27,19 @@ body {
 .title {
     font-size: 32px;
     text-align: center;
-    border-bottom: 1px solid black;
     margin: 10px;
     padding-bottom: 10px;
+}
+
+a {
+    color: black;
 }
 
 .menu {
     font-size: 22px;
     text-align: center;
-    border-bottom: 1px solid black;
-    margin: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 14px;
+    padding-top: 14px;
 }
 
 .menu__item {
@@ -61,4 +63,14 @@ body {
 
 .page-link {
     cursor: pointer;
+}
+
+.menu {
+    background-color: darksalmon;
+}
+
+button {
+    background-color: darksalmon;
+    color: white;
+    padding: 10px 50px;
 }

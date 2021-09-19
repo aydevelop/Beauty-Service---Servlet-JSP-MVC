@@ -1,15 +1,13 @@
 package com.epam.beautyservice.database.base;
 
-import com.epam.beautyservice.database.CategoryDao;
-import com.epam.beautyservice.database.OrderDao;
-import com.epam.beautyservice.database.ServiceDao;
-import com.epam.beautyservice.database.UserDao;
+import com.epam.beautyservice.database.*;
 
 public class UnitOfWork {
     UserDao users;
     ServiceDao services;
     CategoryDao categories;
     OrderDao orders;
+    SlotDao slots;
 
     private static UnitOfWork instance;
 
@@ -25,6 +23,13 @@ public class UnitOfWork {
             users = new UserDao();
         }
         return users;
+    }
+
+    public synchronized SlotDao getSlots() {
+        if (slots == null) {
+            slots = new SlotDao();
+        }
+        return slots;
     }
 
     public synchronized ServiceDao getServices() {

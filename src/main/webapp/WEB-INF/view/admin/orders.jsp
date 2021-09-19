@@ -9,7 +9,7 @@
     <div>
         <table cellspacing="20">
             <tr>
-                <th width="100px">date-time</th>
+                <th width="100px">date</th>
                 <th>status</th>
                 <th>name_ua</th>
                 <th>description_ua</th>
@@ -22,7 +22,7 @@
             </tr>
             <c:forEach items="${orders}" var="order">
                 <tr>
-                    <td>${order.dataTime}</td>
+                    <td>${order.date}</td>
                     <td width="80">
                         <c:choose>
                             <c:when test="${order.status == 'is_canceled'}">

@@ -21,7 +21,8 @@ public class UserOrderCreatePostAction extends Base implements Action {
     public void execute() throws IOException {
         String idService = request.getParameter("service-id");
         String idMaster = request.getParameter("master-id");
-        //String datetime = request.getParameter("datetime");
+        String idSlot = request.getParameter("slot-id");
+        String date = request.getParameter("date");
 
         User user = (User) request.getSession().getAttribute("user");
         long id = user.getId();
@@ -30,7 +31,8 @@ public class UserOrderCreatePostAction extends Base implements Action {
         order.setClientId((int) id);
         order.setServiceId(Integer.parseInt(idService));
         order.setMasterId(Integer.parseInt(idMaster));
-        order.setDataTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        order.setDate(date);
+        order.setSlotId(Integer.parseInt(idSlot));
         db.getOrders().create(order);
 
         request.getSession().setAttribute("message", "The service with the id " + idService + " is taken");

@@ -1,29 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div style="display: flex; justify-content: space-between">
-    <div>
-        <c:if test="${total != 0}">
-            <h3> Total Services: ${total} </h3>
-        </c:if>
-    </div>
-    <div>
+<c:if test="${services.size() > 0}">
+    <div style="display: flex; justify-content: space-between">
+        <div>
+            <c:if test="${total != 0}">
+                <h3> Total Services: ${total} </h3>
+            </c:if>
+        </div>
+        <div>
         <span style="font-size: 22px">
             Per page:
         </span>
-        <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">
-            <option value="3" <c:if test="${recordsPerPage == '3'}">selected</c:if>>3</option>
-            <option value="2" <c:if test="${recordsPerPage == '2'}">selected</c:if>>2</option>
-            <option value="1" <c:if test="${recordsPerPage == '1'}">selected</c:if>>1</option>
-        </select>
+            <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">
+                <option value="3" <c:if test="${recordsPerPage == '3'}">selected</c:if>>3</option>
+                <option value="2" <c:if test="${recordsPerPage == '2'}">selected</c:if>>2</option>
+                <option value="1" <c:if test="${recordsPerPage == '1'}">selected</c:if>>1</option>
+            </select>
+        </div>
     </div>
-</div>
-
+</c:if>
+<c:if test="${services.size() == 0}">
+    <div style="text-align: center; font-size: 18px; margin: 50px; margin-top: 5px"><h3>There are no services
+        found.</h3></div>
+</c:if>
 <div class="category">
-    <c:if test="${services.size() == 0}">
-        <h3>There are no services found.</h3>
-    </c:if>
-
     <c:forEach items="${services}" var="service">
         <div class="category-item" style="position: relative">
             <div>
@@ -35,18 +36,17 @@
 </div>
 
 <div id="pagination"
-     style="border: 1px solid black; padding: 10px; font-size: 22px">
+     style="padding: 6px; font-size: 22px; margin-top: 30px; text-align: center">
     <c:forEach begin="1" end="${noOfPages}" var="i">
         <c:choose>
             <c:when test="${currentPage eq i}">
-                <span style="color: red; font-weight: bold" class="page-item active">&nbsp;&nbsp;&nbsp;<a
-                        class="page-link">
-                        [${i}]</span></a>
+                <span style="font-weight: bold" class="page-item active">
+                    <a style="color: red; margin-left: 20px" class="page-link">[${i}]</a>
                 </span>
             </c:when>
             <c:otherwise>
-                <span class="page-item">&nbsp;&nbsp;&nbsp;<a onclick="return false;" data-index="${i}"
-                                                             class="page-link">[${i}]</a>
+                <span class="page-item">&nbsp;&nbsp;&nbsp;
+                    <a onclick="return false;" data-index="${i}" class="page-link">[${i}]</a>
                 </span>
             </c:otherwise>
         </c:choose>

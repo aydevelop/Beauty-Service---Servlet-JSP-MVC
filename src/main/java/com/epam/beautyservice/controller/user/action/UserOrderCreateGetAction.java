@@ -3,6 +3,7 @@ package com.epam.beautyservice.controller.user.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Service;
+import com.epam.beautyservice.model.Slot;
 import com.epam.beautyservice.model.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +22,13 @@ public class UserOrderCreateGetAction extends Base implements Action {
         Long lid = Long.parseLong(id);
         Service service = db.getServices().findById(lid);
         List<User> masters = db.getUsers().findAllByService(lid);
+        List<Slot> slots = db.getSlots().queryAll();
 
+        request.setAttribute("slots", slots);
         request.setAttribute("service", service);
         request.setAttribute("masters", masters);
+
+
         view(view, request, response);
     }
 }

@@ -1,5 +1,7 @@
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\CategoryDao.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\filter\EncodingFilter.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Slot.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\FoundedTag.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\auth\AuthController.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\home\action\HomeServiceSortPostAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Service.java
@@ -10,7 +12,7 @@ C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Ent
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\action\AdminIndexGetAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\base\DBManager.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\filter\AccessFilter.java
-C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\HelloTag.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\SlotDao.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\OrderDao.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\auth\action\AuthLoginPostAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Order.java

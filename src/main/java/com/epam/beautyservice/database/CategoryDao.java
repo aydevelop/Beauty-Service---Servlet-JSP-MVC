@@ -60,7 +60,8 @@ public class CategoryDao implements GeneralDao<Category> {
     private Category getCategory(ResultSet rs) throws SQLException {
         Category item = new Category();
         item.setId(rs.getLong("id"));
-        item.setName(rs.getString("name"));
+        item.setName_ua(rs.getString("name_ua"));
+        item.setName_en(rs.getString("name_en"));
         return item;
     }
 }

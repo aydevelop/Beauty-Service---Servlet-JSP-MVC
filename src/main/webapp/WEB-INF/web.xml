@@ -28,7 +28,7 @@
 
     <context-param>
         <param-name>RecordsPerPage</param-name>
-        <param-value>2</param-value>
+        <param-value>3</param-value>
     </context-param>
 
     <filter>

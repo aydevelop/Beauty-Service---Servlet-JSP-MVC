@@ -21,8 +21,8 @@ public class OrderDao implements GeneralDao<Order> {
             " LEFT JOIN service ON service.id = `order`.service_id" +
             " LEFT JOIN category ON category.id = service.category_id";
 
-    private static final String SQL_EDIT = "UPDATE `order` SET data_time=?, status=?, feedback_text = ?, feedback_rating = ? where id=?";
-    private static final String SQL_CREATE = "INSERT INTO `order` (data_time, client_id, master_id, service_id) VALUES (?, ?, ?, ?)";
+    private static final String SQL_EDIT = "UPDATE `order` SET date=?, status=?, feedback_text = ?, feedback_rating = ? where id=?";
+    private static final String SQL_CREATE = "INSERT INTO `order` (date, client_id, master_id, service_id) VALUES (?, ?, ?, ?)";
 
     @Override
     public List<Order> query(String sql, ExtraMapper<Order> mapper) {
@@ -53,22 +53,24 @@ public class OrderDao implements GeneralDao<Order> {
     public List<Order> queryAllWithUserService() {
         return query(SQL_READ_All_WITH_USER_SERVICE, (order, rs) -> {
             User client = new User();
-            client.setEmail(rs.getString(17));
-            client.setFirst_name(rs.getString(18));
-            client.setLast_name(rs.getString(19));
+            client.setEmail(rs.getString(18));
+            client.setFirst_name(rs.getString(19));
+            client.setLast_name(rs.getString(20));
             order.setClient(client);
 
             User master = new User();
-            master.setEmail(rs.getString(20));
-            master.setFirst_name(rs.getString(21));
-            master.setLast_name(rs.getString(22));
+            master.setEmail(rs.getString(21));
+            master.setFirst_name(rs.getString(22));
+            master.setLast_name(rs.getString(23));
             order.setMaster(master);
 
             Service service = new Service();
-            service.setName_ua(rs.getString(10));
-            service.setDescription_ua(rs.getString(14));
+            service.setName_ua(rs.getString(11));
+            service.setDescription_ua(rs.getString(15));
             order.setService(service);
-            order.setCategory(rs.getString(24));
+            order.setCategory(rs.getString(25));
+
+            int stop = 0;
         });
     }
 
@@ -97,7 +99,7 @@ public class OrderDao implements GeneralDao<Order> {
             Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_CREATE);
             int k = 1;
-            pstmt.setString(k++, order.getDataTime());
+            pstmt.setString(k++, order.getDate());
             pstmt.setInt(k++, order.getClientId());
             pstmt.setInt(k++, order.getMasterId());
             pstmt.setInt(k++, order.getServiceId());
@@ -105,6 +107,8 @@ public class OrderDao implements GeneralDao<Order> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        int stop = 10;
     }
 
     @Override
@@ -114,7 +118,7 @@ public class OrderDao implements GeneralDao<Order> {
             PreparedStatement pstmt = con.prepareStatement(SQL_EDIT);
             int k = 1;
 
-            pstmt.setString(k++, order.getDataTime());
+            pstmt.setString(k++, order.getDate());
             pstmt.setString(k++, order.getStatus());
             pstmt.setString(k++, order.getFeedbackText());
             pstmt.setString(k++, order.getFeedbackRating());
@@ -129,7 +133,7 @@ public class OrderDao implements GeneralDao<Order> {
         Order order = new Order();
         try {
             order.setId(rs.getLong("id"));
-            order.setDataTime(rs.getString("data_time"));
+            order.setDate(rs.getString("date"));
             order.setStatus(rs.getString("status"));
             order.setFeedbackText(rs.getString("feedback_text"));
             order.setFeedbackRating(rs.getString("feedback_rating"));

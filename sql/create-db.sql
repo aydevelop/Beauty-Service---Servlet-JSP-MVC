@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS role
     name VARCHAR(20) NOT NULL
 );
 
+# noinspection SqlNoDataSourceInspection
+
 CREATE TABLE IF NOT EXISTS user
 (
     id         INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -22,7 +24,14 @@ CREATE TABLE IF NOT EXISTS user
 CREATE TABLE IF NOT EXISTS category
 (
     id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(40) NOT NULL
+    name_ua VARCHAR(40) NOT NULL,
+    name_en VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS slot
+(
+    id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    slot VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `service`
@@ -38,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `service`
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `master_service`
+CREATE TABLE IF NOT EXISTS `user_service`
 (
     id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     master_id  INT NOT NULL,
@@ -50,26 +59,28 @@ CREATE TABLE IF NOT EXISTS `master_service`
 CREATE TABLE IF NOT EXISTS `order`
 (
     id              INT                                                  NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    data_time       DATETIME                                             NOT NULL,
+    date            DATE                                                 NOT NULL,
     status          ENUM ('is_new', 'is_paid', 'is_canceled', 'is_done') NOT NULL DEFAULT 'is_new',
     feedback_text   VARCHAR(200)                                         NULL,
     feedback_rating INT                                                  NULL,
     client_id       INT                                                  NOT NULL,
     master_id       INT                                                  NOT NULL,
     service_id      INT                                                  NOT NULL,
+    slot_id         INT                                                  NOT NULL DEFAULT 1,
     FOREIGN KEY (client_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (master_id) REFERENCES user (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    FOREIGN KEY (slot_id) REFERENCES slot (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-INSERT INTO category (id, name)
-VALUES (1, 'Перукарські послуги'),
-       (2, 'Манікюр та педикюр'),
-       (3, 'Послуги косметолога'),
-       (4, 'Макіяж та візаж'),
-       (5, 'Нарощення вій'),
-       (6, 'Тату / татуаж / боді арт хною'),
-       (7, 'Масаж та СПА');
+INSERT INTO category (id, name_ua, name_en)
+VALUES (1, 'Перукарські послуги', 'Hairdressing services '),
+       (2, 'Манікюр та педикюр', 'Manicure and pedicure '),
+       (3, 'Послуги косметолога', 'Cosmetologist services '),
+       (4, 'Макіяж та візаж', 'Makeup and makeup '),
+       (5, 'Нарощення вій', 'Eyelash extensions'),
+       (6, 'Тату / татуаж / боді арт хною', 'Henna tattoo / tattoo / body art'),
+       (7, 'Масаж та СПА', 'Massage and spa ');
 
 INSERT INTO role (id, name)
 VALUES (1, 'Гість'),
@@ -135,7 +146,7 @@ VALUES (1, 'kbartelli2@wufoo.com',
         'Othelia', 'Maymond', 4);
 
 
-INSERT INTO master_service (id, master_id, service_id)
+INSERT INTO user_service (id, master_id, service_id)
 VALUES (1, 4, 2),
        (2, 9, 1),
        (3, 3, 3),
@@ -143,7 +154,20 @@ VALUES (1, 4, 2),
        (5, 3, 3),
        (6, 6, 3);
 
-INSERT INTO `order` (id, data_time, status, feedback_text, feedback_rating, client_id, master_id, service_id)
-VALUES (1, '2021-09-12 12:50:00', 'is_done', 'good', 5, 10, 7, 3),
-       (2, '2021-10-12 12:50:00', 'is_done', 'good', 5, 5, 7, 1),
-       (3, '2021-11-12 12:50:00', 'is_done', 'good', 5, 5, 7, 3);
+INSERT INTO slot (id, slot)
+VALUES (1, '8:00-9:00'),
+       (2, '9:00-10:00'),
+       (3, '10:00-11:00'),
+       (4, '12:00-13:00'),
+       (5, '13:00-14:00'),
+       (6, '14:00-15:00'),
+       (7, '15:00-16:00'),
+       (8, '16:00-17:00'),
+       (9, '17:00-18:00');
+
+
+INSERT INTO `order` (id, date, status, feedback_text, feedback_rating, client_id, master_id, service_id)
+VALUES (1, '2021-09-12', 'is_done', 'good', 5, 10, 7, 3),
+       (2, '2021-10-12', 'is_done', 'good', 5, 5, 7, 1),
+       (3, '2021-11-12', 'is_done', 'good', 5, 5, 7, 3);
+

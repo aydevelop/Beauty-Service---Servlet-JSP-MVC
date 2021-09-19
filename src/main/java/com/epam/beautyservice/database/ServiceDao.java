@@ -12,9 +12,9 @@ public class ServiceDao implements GeneralDao<Service> {
     private static final String SQL_READ_All = "SELECT * FROM service";
     private static final String SQL_READ = "SELECT * FROM service WHERE id=?";
     private static final String SQL_READ_BY_ID = "SELECT * FROM service WHERE service.id = ?";
-    private static final String SQL_READ_All_WITH_MASTER_AND_CATEGORY = "SELECT service.*, category.name, GROUP_CONCAT(master_service.master_id) " +
+    private static final String SQL_READ_All_WITH_MASTER_AND_CATEGORY = "SELECT service.*, category.name, GROUP_CONCAT(user_service.master_id) " +
             " FROM service LEFT JOIN category ON service.category_id = category.id" +
-            " LEFT JOIN master_service ON master_service.service_id = service.id" +
+            " LEFT JOIN user_service ON user_service.service_id = service.id" +
             " GROUP BY service.id";
 
     @Override

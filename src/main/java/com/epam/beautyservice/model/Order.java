@@ -1,8 +1,8 @@
 package com.epam.beautyservice.model;
 
 public class Order extends Entity {
-    private final long serialVersionUID = 2322302708945348585L;
-    private String dataTime;
+    private final long serialVersionUID = 2322302708125348585L;
+    private String date;
     private String status;
     private String feedbackText;
     private String feedbackRating;
@@ -13,6 +13,16 @@ public class Order extends Entity {
     private int masterId;
     private User master;
     private int serviceId;
+
+    public int getSlotId() {
+        return slotId;
+    }
+
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
+    }
+
+    private int slotId;
 
     public int getMasterId() {
         return masterId;
@@ -56,12 +66,12 @@ public class Order extends Entity {
         this.service = service;
     }
 
-    public String getDataTime() {
-        return dataTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDataTime(String dataTime) {
-        this.dataTime = dataTime;
+    public void setDate(String dataTime) {
+        this.date = dataTime;
     }
 
     public String getStatus() {

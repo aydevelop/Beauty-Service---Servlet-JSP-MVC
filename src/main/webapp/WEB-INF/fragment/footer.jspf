@@ -1,10 +1,12 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="f" uri="/WEB-INF/fragment/founded.tld" %>
 
 </div>
 <div class="footer"
-     style="border: 1px solid black; background-color: darksalmon; height: 40px; padding-top: 25px; font-size: 20px; margin-top: 20px">
+     style="background-color: darksalmon; height: auto; padding-bottom: 20px;  padding-top: 25px; font-size: 20px; margin-top: 20px">
     <div>
-        <t:fontstyle size="20" bold="false">Footer</t:fontstyle>
+        <t:fontstyle size="20" bold="true">Founded</t:fontstyle>
+        <f:founded year="2010"/>
     </div>
 
 </div>

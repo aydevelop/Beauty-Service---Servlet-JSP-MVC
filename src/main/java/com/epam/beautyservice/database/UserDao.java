@@ -14,10 +14,7 @@ public class UserDao implements GeneralDao<User> {
     private static final String SQL_READ_BY_EMAIL = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE email=?";
     private static final String SQL_READ_MASTER = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE role.name = 'master'";
     private static final String SQL_READ_MASTER_BY_SERVICE = "SELECT user.* FROM user_service LEFT JOIN user ON user.id = user_service.master_id WHERE user_service.service_id=?";
-//    private static final String SQL_READ_WITH_RATING = "SELECT * FROM user" +
-//            " LEFT JOIN user_service ON user_service.master_id = user.id" +
-//            " LEFT JOIN `order` AS ord ON ord.user_service_id = user_service.id ";
-
+    
     private static final String SQL_READ_WITH_RATING = "SELECT user.*, SUM(`order`.feedback_rating) FROM user " +
             "LEFT JOIN `order` ON `order`.master_id = user.id " +
             "GROUP BY user.email " +

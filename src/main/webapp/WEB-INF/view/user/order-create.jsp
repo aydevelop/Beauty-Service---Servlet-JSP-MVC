@@ -6,28 +6,43 @@
 
 <form action="/user/order-create" method="post">
     <input type="hidden" name="service-id" value="${service.id}">
-    <h1>Create Order ....</h1>
-    <div>${service.name_ua}</div>
-    <div>${service.price}</div>
-    <div>${service.description_ua}</div>
-
-    <% Service service = (Service) request.getAttribute("service"); %>
-    <% String locale = (String) request.getSession().getAttribute("defaultLocale"); %>
-    <%= service.getName(locale) %>
-
-    <br/>
-    <hr>
-    <br/>
-
-    <select name="master-id">
+    <div style="font-size: 22px; margin: 50px; text-align: center">
+        <h3 style="margin-bottom: 15px">Create Order</h3>
+        <hr/>
+        <div style="margin-top: 15px">
+            <% Service service = (Service) request.getAttribute("service"); %>
+            <% String locale = (String) request.getSession().getAttribute("defaultLocale"); %>
+            <%= service.getName(locale) %>
+        </div>
+        <div style="margin-top: 15px">$ ${service.price}</div>
+        <br/>
+        <hr>
+        <br/>
+        Master: <select style="margin-bottom: 15px; font-size: 20px" name="master-id">
         <c:forEach items="${masters}" var="master">
             <option value="${master.id}">${master.first_name} ${master.last_name}</option>
         </c:forEach>
     </select>
-
-    <br/>
-    <br/>
-    <button style="padding: 10px 40px" type="submit">Take Service</button>
+        <hr>
+        Slot: <select style="margin-top: 15px; margin-bottom: 15px; font-size: 20px" name="slot-id">
+        <c:forEach items="${slots}" var="slot">
+            <option value="${slot.id}">${slot.name}</option>
+        </c:forEach>
+    </select>
+        <br>
+        <p>Date: <input type="text" name="date" id="datepicker"></p>
+        <br/>
+        <hr>
+        <br/>
+        <br/>
+        <button style="padding: 10px 40px" type="submit">Take Service</button>
+    </div>
 </form>
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker({minDate: new Date(), dateFormat: 'yy-mm-dd'});
+    });
+</script>
 
 <%@include file="../../fragment/footer.jspf" %>
