@@ -28,7 +28,6 @@ public class HomeServiceSortPostAction extends Base implements Action {
             services = services.stream().filter(s -> categories.contains(s.getCategoryId())).collect(Collectors.toList());
         }
 
-
         if (masters.size() > 0) {
             services = services.stream().filter(s -> {
                 for (String master : masters) {
@@ -41,7 +40,6 @@ public class HomeServiceSortPostAction extends Base implements Action {
             }).collect(Collectors.toList());
         }
 
-        ;
         services = Pagination.Generation(request, services);
         request.setAttribute("services", services);
         fragment("services", request, response);

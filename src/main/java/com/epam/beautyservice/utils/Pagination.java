@@ -28,9 +28,15 @@ public class Pagination {
         }
 
         int size = services.size();
-        int nOfPages = services.size() / recordsPerPage;
-        if (nOfPages > 0 && size % nOfPages > 0) {
-            nOfPages++;
+        int nOfPages = size / recordsPerPage;
+        if (nOfPages > 1) {
+            if(recordsPerPage != 1) {
+                nOfPages++;
+            }
+        }else{
+            if(size!=recordsPerPage) {
+                nOfPages++;
+            }
         }
 
         request.setAttribute("noOfPages", nOfPages);
