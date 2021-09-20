@@ -19,17 +19,17 @@
             <a href="/">BeautyService</a>
             <div style="position: absolute; right: 0px; top: 13px; font-size: 18px; font-weight: bold">
                 <a href="/master" style="margin-right: 20px">
-                    <fmt:message key="home.master"/>
+                    <fmt:message key="master"/>
                 </a>
-                <a href="/admin" style="margin-right: 50px"><fmt:message key="home.administrator"/></a>
+                <a href="/admin" style="margin-right: 50px"><fmt:message key="administrator"/></a>
                 <%
                     if (session.getAttribute("user") == null) {
                 %>
-                <a href="/auth/login" style="margin-right: 20px"><fmt:message key="home.login"/></a>
-                <a href="/auth/register"><fmt:message key="home.registration"/></a>
+                <a href="/auth/login" style="margin-right: 20px"><fmt:message key="login"/></a>
+                <a href="/auth/register"><fmt:message key="registration"/></a>
                 <% } else { %>
                 <b>${sessionScope.user.getEmail()}</b>
-                <a href="/auth/logout"><fmt:message key="home.logout"/></a>
+                <a href="/auth/logout"><fmt:message key="logout"/></a>
                 <% }%>
             </div>
         </div>

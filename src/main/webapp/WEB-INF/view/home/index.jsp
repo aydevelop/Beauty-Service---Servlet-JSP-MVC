@@ -3,12 +3,12 @@
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="margin-top: 30px; margin-left: 40px; text-align: left; font-weight: normal; font-size: 30px">
-    <div><fmt:message key="home.services"/></div>
+    <div><fmt:message key="services"/></div>
 </div>
 <div style="display: flex; flex-direction: row">
     <div id="filters"
          style="width: 340px; border: 1px solid black; margin-right: 20px; padding-left: 20px; padding-right: 10px; padding-top:20px; margin-top: 10px">
-        <fmt:message key="home.categories"/>
+        <fmt:message key="categories"/>
         <div id="filter-category">
             <c:forEach items="${categories}" var="category">
                 <div style="margin-top: 10px; cursor: pointer">
@@ -24,7 +24,7 @@
             </c:forEach>
         </div>
         <br/>
-        <fmt:message key="home.masters"/>
+        <fmt:message key="masters"/>
         <div id="filter-master">
             <c:forEach items="${masters}" var="master">
                 <div style="margin-top: 10px">
@@ -49,14 +49,14 @@
 </div>
 
 <div style=" margin-left: 40px; margin-top: 30px; text-align: left; font-weight: normal; font-size: 30px; position: relative; bottom: -25px">
-    <div><fmt:message key="home.masters"/></div>
+    <div><fmt:message key="masters"/></div>
 </div>
 <div style="text-align: right; margin-right: 10%; font-size: 22px; height: 50px">
-    Order By:
+    <fmt:message key="order_by"/>:
     <select id="master_select" style="height: 50px; font-size: 22px">
-        <option style="font-size: 22px" value="rating">Rating</option>
-        <option style="font-size: 22px" value="first_name">First Name</option>
-        <option style="font-size: 22px" value="last_name">Last Name</option>
+        <option style="font-size: 22px" value="rating"><fmt:message key="rating"/></option>
+        <option style="font-size: 22px" value="first_name"><fmt:message key="first_name"/></option>
+        <option style="font-size: 22px" value="last_name"><fmt:message key="last_name"/></option>
     </select>
 </div>
 

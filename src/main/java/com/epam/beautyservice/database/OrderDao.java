@@ -2,10 +2,9 @@ package com.epam.beautyservice.database;
 
 import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
-import com.epam.beautyservice.model.Order;
-import com.epam.beautyservice.model.Service;
-import com.epam.beautyservice.model.User;
+import com.epam.beautyservice.model.*;
 
+import javax.xml.catalog.Catalog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +12,16 @@ import java.util.List;
 public class OrderDao implements GeneralDao<Order> {
     private static final String SQL_READ_All = "SELECT * FROM `order`";
     private static final String SQL_READ_BY_ID = "SELECT * FROM `order` WHERE `order`.id = ?";
-    private static final String SQL_READ_All_WITH_USER_SERVICE = "SELECT `order`.*, service.*, " +
+    private static final String SQL_READ_All_WITH_USER_SERVICE = "SELECT `order`.*, service.*, slot.*," +
             "client.email AS client_email, client.first_name AS 'client_first_name', client.last_name AS 'client_last_name', " +
             "master.email AS master_email, master.first_name AS 'master_first_name', master.last_name AS 'master_last_name', category.* FROM `order` " +
             " LEFT JOIN user AS client ON client.id = `order`.client_id" +
             " LEFT JOIN user AS master ON master.id = `order`.master_id" +
             " LEFT JOIN service ON service.id = `order`.service_id" +
-            " LEFT JOIN category ON category.id = service.category_id";
+            " LEFT JOIN category ON category.id = service.category_id" +
+            " LEFT JOIN slot ON slot.id = order.slot_id";
 
-    private static final String SQL_EDIT = "UPDATE `order` SET date=?, status=?, feedback_text = ?, feedback_rating = ? where id=?";
+    private static final String SQL_EDIT = "UPDATE `order` SET date=?, status=?, feedback_text = ?, feedback_rating = ?, slot_id = ? where id=?";
     private static final String SQL_CREATE = "INSERT INTO `order` (date, client_id, master_id, service_id) VALUES (?, ?, ?, ?)";
 
     @Override
@@ -50,27 +50,33 @@ public class OrderDao implements GeneralDao<Order> {
         return query(SQL_READ_All, null);
     }
 
-    public List<Order> queryAllWithUserService() {
+    public List<Order> queryAllWithUserServiceAndSlot() {
         return query(SQL_READ_All_WITH_USER_SERVICE, (order, rs) -> {
             User client = new User();
-            client.setEmail(rs.getString(18));
-            client.setFirst_name(rs.getString(19));
-            client.setLast_name(rs.getString(20));
+            client.setEmail(rs.getString(20));
+            client.setFirst_name(rs.getString(21));
+            client.setLast_name(rs.getString(22));
             order.setClient(client);
 
             User master = new User();
-            master.setEmail(rs.getString(21));
-            master.setFirst_name(rs.getString(22));
-            master.setLast_name(rs.getString(23));
+            master.setEmail(rs.getString(23));
+            master.setFirst_name(rs.getString(24));
+            master.setLast_name(rs.getString(25));
             order.setMaster(master);
 
             Service service = new Service();
             service.setName_ua(rs.getString(11));
-            service.setDescription_ua(rs.getString(15));
+            service.setName_en(rs.getString(12));
             order.setService(service);
-            order.setCategory(rs.getString(25));
 
-            int stop = 0;
+            Category category = new Category();
+            category.setName_ua(rs.getString(27));
+            category.setName_en(rs.getString(28));
+            order.setCategory(category);
+
+            Slot slot = new Slot();
+            slot.setName(rs.getString(19));
+            order.setSlot(slot);
         });
     }
 
@@ -118,10 +124,13 @@ public class OrderDao implements GeneralDao<Order> {
             PreparedStatement pstmt = con.prepareStatement(SQL_EDIT);
             int k = 1;
 
+            Object getSlotId = order.getSlotId();
+
             pstmt.setString(k++, order.getDate());
             pstmt.setString(k++, order.getStatus());
             pstmt.setString(k++, order.getFeedbackText());
             pstmt.setString(k++, order.getFeedbackRating());
+            pstmt.setLong(k++, order.getSlotId());
             pstmt.setLong(k++, order.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -137,6 +146,7 @@ public class OrderDao implements GeneralDao<Order> {
             order.setStatus(rs.getString("status"));
             order.setFeedbackText(rs.getString("feedback_text"));
             order.setFeedbackRating(rs.getString("feedback_rating"));
+            order.setSlotId(rs.getInt("slot_id"));
         } catch (Exception e) {
             e.printStackTrace();
         }

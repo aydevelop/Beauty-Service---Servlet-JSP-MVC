@@ -17,7 +17,7 @@ public class MasterIndexGetAction extends Base implements Action {
 
     @Override
     public void execute() throws IOException {
-        List<Order> orders = db.getOrders().queryAllWithUserService();
+        List<Order> orders = db.getOrders().queryAllWithUserServiceAndSlot();
         List<Order> orders2 = orders.stream()
                 .filter(x -> x.getStatus().equals("is_canceled") == false).collect(Collectors.toList());
         request.setAttribute("orders", orders2);

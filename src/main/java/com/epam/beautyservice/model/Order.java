@@ -6,13 +6,23 @@ public class Order extends Entity {
     private String status;
     private String feedbackText;
     private String feedbackRating;
-    private String category;
+    private Category category;
 
     private int clientId;
     private User client;
     private int masterId;
     private User master;
     private int serviceId;
+    private int slotId;
+    private Slot slot;
+
+    public Slot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
 
     public int getSlotId() {
         return slotId;
@@ -21,8 +31,6 @@ public class Order extends Entity {
     public void setSlotId(int slotId) {
         this.slotId = slotId;
     }
-
-    private int slotId;
 
     public int getMasterId() {
         return masterId;
@@ -34,11 +42,11 @@ public class Order extends Entity {
 
     private Service service;
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

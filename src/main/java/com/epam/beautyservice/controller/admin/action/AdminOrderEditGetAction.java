@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class AdminOrderGetAction extends Base implements Action {
-    public AdminOrderGetAction(String view, HttpServletRequest request, HttpServletResponse response) {
+public class AdminOrderEditGetAction extends Base implements Action {
+    public AdminOrderEditGetAction(String view, HttpServletRequest request, HttpServletResponse response) {
         super(view, request, response);
     }
 

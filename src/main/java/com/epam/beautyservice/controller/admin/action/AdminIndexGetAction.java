@@ -15,7 +15,7 @@ public class AdminIndexGetAction extends Base implements Action {
 
     @Override
     public void execute() {
-        List<Order> orders = db.getOrders().queryAllWithUserService();
+        List<Order> orders = db.getOrders().queryAllWithUserServiceAndSlot();
         request.setAttribute("orders", orders);
         view(view, request, response);
     }

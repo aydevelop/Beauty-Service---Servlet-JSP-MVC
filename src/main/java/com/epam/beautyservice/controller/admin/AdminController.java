@@ -3,7 +3,7 @@ package com.epam.beautyservice.controller.admin;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.admin.action.AdminIndexGetAction;
 import com.epam.beautyservice.controller.admin.action.AdminOrderEditPostAction;
-import com.epam.beautyservice.controller.admin.action.AdminOrderGetAction;
+import com.epam.beautyservice.controller.admin.action.AdminOrderEditGetAction;
 import com.epam.beautyservice.utils.Router;
 
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class AdminController extends HttpServlet {
 
         switch (path) {
             case "order-edit":
-                action = new AdminOrderGetAction("admin/order-edit", request, response);
+                action = new AdminOrderEditGetAction("admin/order-edit", request, response);
                 break;
             default:
                 action = new AdminIndexGetAction("admin/orders", request, response);

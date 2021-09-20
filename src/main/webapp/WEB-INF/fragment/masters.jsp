@@ -7,7 +7,7 @@
             <div><img src="https://via.placeholder.com/150"></div>
             <div>${master.email}</div>
             <div>${master.first_name} ${master.last_name}</div>
-            <div>Rating: ${master.rating}</div>
+            <div><fmt:message key="rating"/>: ${master.rating}</div>
         </div>
     </c:forEach>
 </div>

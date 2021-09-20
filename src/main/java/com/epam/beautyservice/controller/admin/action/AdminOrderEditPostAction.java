@@ -16,10 +16,12 @@ public class AdminOrderEditPostAction extends Base implements Action {
     @Override
     public void execute() throws IOException {
         String status = request.getParameter("status");
+        String slotId = request.getParameter("slot-id");
         String id = request.getParameter("id");
 
         Order order = db.getOrders().findById(Long.parseLong(id));
         order.setStatus(status);
+        order.setSlotId(Integer.parseInt(slotId));
         db.getOrders().edit(Long.parseLong(id), order);
 
         response.sendRedirect("/admin");

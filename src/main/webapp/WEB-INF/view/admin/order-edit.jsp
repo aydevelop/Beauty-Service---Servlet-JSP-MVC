@@ -9,7 +9,7 @@
         </h1>
         <select style="margin-top: 15px; margin-bottom: 15px; font-size: 20px" name="slot-id">
         <c:forEach items="${slots}" var="slot">
-            <option value="${slot.id}">${slot.name}</option>
+            <option ${order.slotId == slot.id ? "selected" : ""}  value="${slot.id}">${slot.name}</option>
         </c:forEach>
     </select>
     </div>

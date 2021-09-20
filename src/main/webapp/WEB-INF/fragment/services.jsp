@@ -5,12 +5,12 @@
     <div style="display: flex; justify-content: space-between">
         <div>
             <c:if test="${total != 0}">
-                <h3> Total Services: ${total} </h3>
+                <h3> <fmt:message key="totals_services"/>: ${total} </h3>
             </c:if>
         </div>
         <div>
         <span style="font-size: 22px">
-            Per page:
+            <fmt:message key="per_page"/>:
         </span>
             <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">
                 <option value="3" <c:if test="${recordsPerPage == '3'}">selected</c:if>>3</option>
@@ -21,8 +21,7 @@
     </div>
 </c:if>
 <c:if test="${services.size() == 0}">
-    <div style="text-align: center; font-size: 18px; margin: 50px; margin-top: 5px"><h3>There are no services
-        found.</h3></div>
+    <div style="text-align: center; font-size: 18px; margin: 50px; margin-top: 5px"><h3>There are no services found.</h3></div>
 </c:if>
 <div class="category">
     <c:forEach items="${services}" var="service">
@@ -30,7 +29,7 @@
             <div>
                     ${service.getName(defaultLocale)}
             </div>
-            <a href="/user/order-create?id=${service.id}">Take Service</a>
+            <a href="/user/order-create?id=${service.id}"><fmt:message key="sign_up"/></a>
         </div>
     </c:forEach>
 </div>

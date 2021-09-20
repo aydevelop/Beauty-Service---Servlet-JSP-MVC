@@ -1,5 +1,5 @@
 <div class="lang" style="margin-left: 50px; padding: 10px; display: inline-block">
-    <span>Language: </span>
+    <span><fmt:message key="language"/>: </span>
     <c:forEach var="locale" items="${locales}">
         <a style="padding: 4px; font-size: 25px; ${ locale eq defaultLocale ? "border: 1px solid black": "" }"
            href="/home/lang-change?lang=${locale}">${locale}</a>
