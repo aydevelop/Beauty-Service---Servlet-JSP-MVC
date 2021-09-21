@@ -1,5 +1,7 @@
 package com.epam.beautyservice.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
 public class Validator {
@@ -35,5 +37,18 @@ public class Validator {
             }
         }
     }
-    
+
+    public static boolean isDateValid(String date)
+    {
+        String DATE_FORMAT = "yyyy-MM-dd";
+
+        try {
+            DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+            df.setLenient(false);
+            df.parse(date);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

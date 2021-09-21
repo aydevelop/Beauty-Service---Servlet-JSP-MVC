@@ -1,0 +1,13 @@
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="java.util.Locale" %>
+<%
+    String loc = (String) session.getAttribute("defaultLocale");
+    String title = "";
+
+    Object obj = session.getAttribute("pre_title");
+    if(obj != null){
+        String value = (String) obj;
+        title = ResourceBundle.getBundle("resources", new Locale(loc)).getString(value);
+        session.setAttribute("title", title);
+    }
+%>

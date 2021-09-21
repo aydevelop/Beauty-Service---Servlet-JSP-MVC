@@ -6,6 +6,7 @@ import com.epam.beautyservice.controller.home.action.HomeLangChangeGetAction;
 import com.epam.beautyservice.controller.home.action.HomeMasterSortPostAction;
 import com.epam.beautyservice.controller.home.action.HomeServiceSortPostAction;
 import com.epam.beautyservice.utils.Router;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,14 @@ import java.io.IOException;
 
 @WebServlet(value = "/home/*")
 public class HomeController extends HttpServlet {
+    Logger logger = Logger.getLogger(HomeController.class);
     Action action = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
+
+        logger.info("HomeController doGet action");
 
         switch (path) {
             case "lang-change":
@@ -36,6 +40,8 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = Router.parse(request.getPathInfo());
+
+        logger.info("HomeController doPost action");
 
         switch (path) {
             case "master-sort":

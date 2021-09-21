@@ -1,5 +1,7 @@
 package com.epam.beautyservice.listener;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -22,6 +24,8 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
+        initLog4J(servletContext);
+
         String localesValue = servletContext.getInitParameter("Locales");
         if (localesValue != null && localesValue.isEmpty() == false) {
 
@@ -53,5 +57,13 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
+    }
+
+    private void initLog4J(ServletContext servletContext) {
+        try {
+            PropertyConfigurator.configure(servletContext.getRealPath("WEB-INF/log4j.properties"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

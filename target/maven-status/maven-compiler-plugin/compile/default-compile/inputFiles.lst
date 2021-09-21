@@ -7,6 +7,7 @@ C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controlle
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Service.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\Action.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\ServiceCategory.java
+C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\action\AdminOrderEditGetAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Category.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Entity.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\action\AdminIndexGetAction.java
@@ -43,6 +44,5 @@ C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\utils\Sec
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\user\action\UserOrderCreateGetAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\user\UserController.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\database\base\ExtraMapper.java
-C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\admin\action\AdminOrderGetAction.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\model\Role.java
 C:\Users\A2\Desktop\BeautyService\src\main\java\com\epam\beautyservice\controller\auth\action\AuthLoginGetAction.java

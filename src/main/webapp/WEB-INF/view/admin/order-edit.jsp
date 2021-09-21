@@ -1,11 +1,12 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Edit Orders" scope="page"/>
+<c:set var="pre_title" value='order' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <form method="post" action="/admin/order-edit">
     <div style="text-align: center">
         <h1>
-            <div>${order.date}</div>
+            <div><fmt:message key="order"/></div>
         </h1>
         <select style="margin-top: 15px; margin-bottom: 15px; font-size: 20px" name="slot-id">
         <c:forEach items="${slots}" var="slot">

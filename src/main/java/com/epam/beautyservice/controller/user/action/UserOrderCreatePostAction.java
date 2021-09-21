@@ -4,6 +4,7 @@ import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Order;
 import com.epam.beautyservice.model.User;
+import com.epam.beautyservice.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,12 @@ public class UserOrderCreatePostAction extends Base implements Action {
         String idMaster = request.getParameter("master-id");
         String idSlot = request.getParameter("slot-id");
         String date = request.getParameter("date");
+
+        if(!Validator.isDateValid(date)){
+            request.getSession().setAttribute("error", "The date is not valid");
+            response.sendRedirect("/home");
+            return;
+        }
 
         User user = (User) request.getSession().getAttribute("user");
         long id = user.getId();

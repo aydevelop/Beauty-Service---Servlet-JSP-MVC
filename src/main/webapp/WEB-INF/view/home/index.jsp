@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Home Page" scope="page"/>
+<c:set var="pre_title" value='home' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="margin-top: 30px; margin-left: 40px; text-align: left; font-weight: normal; font-size: 30px">

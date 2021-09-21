@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Master Page" scope="page"/>
+<c:set var="pre_title" value='orders' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="margin-top: 50px; margin-bottom: 50px;text-align: center">
@@ -49,7 +50,7 @@
                     <c:if test="${order.status != 'is_done'}">
                         <form method="post" action="/master/order-done">
                             <input type="hidden" name="id" value="${order.id}">
-                            <button type="submit"><b><fmt:message key="mark_as_done"/></b></button>
+                            <button style="padding: 1px" type="submit"><b><fmt:message key="mark_as_done"/></b></button>
                         </form>
                     </c:if>
                 </td>

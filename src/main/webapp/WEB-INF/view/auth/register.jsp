@@ -1,8 +1,11 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Register" scope="page"/>
+<c:set var="pre_title" value='registration' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
-<h1>Register</h1>
+<div style="text-align: center; margin-top: 30px">
+    <h1><fmt:message key="registration"/></h1>
+</div>
 <br/>
 
 <style>
@@ -51,16 +54,16 @@
 </style>
 <form method="post" action="/auth/register">
     <div class="container">
-        <label>First Name : </label>
-        <input type="text" placeholder="First Name" name="first-name" value="${sessionScope.registerFirstName}"
+        <label><fmt:message key="first_name"/> : </label>
+        <input type="text" placeholder="<fmt:message key="first_name"/>" name="first-name" value="${sessionScope.registerFirstName}"
                required>
+        <label><fmt:message key="last_name"/> : </label>
+        <input type="text" placeholder="<fmt:message key="last_name"/>" name="last-name" value="${sessionScope.registerLastName}" required>
         <label>Email : </label>
-        <input type="text" placeholder="Last Name" name="last-name" value="${sessionScope.registerLastName}" required>
-        <label>Email : </label>
-        <input type="text" placeholder="Enter Email" name="email" value="${sessionScope.registerEmail}" required>
-        <label>Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        <button type="submit">R e g i s t e r</button>
+        <input type="text" placeholder="Email" name="email" value="${sessionScope.registerEmail}" required>
+        <label><fmt:message key="password"/> : </label>
+        <input type="password" placeholder="<fmt:message key="password"/>" name="password" required>
+        <button type="submit"><fmt:message key="registration"/></button>
         <%--        <input type="checkbox" checked="checked"> Remember me--%>
         <%--        <button type="button" class="cancelbtn"> Cancel</button>--%>
         <%--        Forgot <a href="#"> password? </a>--%>

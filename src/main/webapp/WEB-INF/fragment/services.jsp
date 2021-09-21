@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <c:if test="${services.size() > 0}">
     <div style="display: flex; justify-content: space-between">
@@ -9,7 +10,7 @@
             </c:if>
         </div>
         <div>
-        <span style="font-size: 22px">
+        <span style="font-size: 22px; margin-left: 200px">
             <fmt:message key="per_page"/>:
         </span>
             <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">

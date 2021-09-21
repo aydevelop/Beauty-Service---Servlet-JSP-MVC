@@ -15,8 +15,6 @@ public class Slot extends Entity {
 
     @Override
     public String toString() {
-        return "Slot {" +
-                "name='" + name + '\'' +
-                '}';
+        return "Slot {" + "name='" + name + '\'' + '}';
     }
 }

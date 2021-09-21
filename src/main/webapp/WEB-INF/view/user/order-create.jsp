@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Order Create" scope="page"/>
+<c:set var="pre_title" value='order' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 <%@ page import="com.epam.beautyservice.model.Service" %>
 
@@ -7,7 +8,7 @@
 <form action="/user/order-create" method="post">
     <input type="hidden" name="service-id" value="${service.id}">
     <div style="font-size: 22px; margin: 50px; text-align: center">
-        <h3 style="margin-bottom: 15px">Create Order</h3>
+        <h3 style="margin-bottom: 15px"><fmt:message key="order"/></h3>
         <hr/>
         <div style="margin-top: 15px">
             <% Service service = (Service) request.getAttribute("service"); %>
@@ -30,7 +31,7 @@
         </c:forEach>
     </select>
         <br>
-        <p>Date: <input type="text" name="date" id="datepicker"></p>
+        <p>Date: <input autocomplete="off" type="text" name="date" id="datepicker"></p>
         <br/>
         <hr>
         <br/>
