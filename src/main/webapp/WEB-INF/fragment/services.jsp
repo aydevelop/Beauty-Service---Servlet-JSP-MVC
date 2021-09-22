@@ -1,28 +1,34 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ include file="/WEB-INF/fragment/base.jspf" %>
 
 <c:if test="${services.size() > 0}">
     <div style="display: flex; justify-content: space-between">
         <div>
             <c:if test="${total != 0}">
-                <h3> <fmt:message key="totals_services"/>: ${total} </h3>
+                <h3><fmt:message key="totals_services"/>: ${total} </h3>
             </c:if>
         </div>
-        <div>
-        <span style="font-size: 22px; margin-left: 200px">
-            <fmt:message key="per_page"/>:
-        </span>
+        <div style="display: flex">
+            <span style="font-size: 22px; margin-right: 15px">
+                <fmt:message key="per_page"/>:
+            </span>
             <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">
-                <option value="3" <c:if test="${recordsPerPage == '3'}">selected</c:if>>3</option>
-                <option value="2" <c:if test="${recordsPerPage == '2'}">selected</c:if>>2</option>
-                <option value="1" <c:if test="${recordsPerPage == '1'}">selected</c:if>>1</option>
+                <c:forEach begin="1" end="${recordsPerPage}" var="i">
+                    <c:choose>
+                        <c:when test="${recordsPerPage eq i}">
+                            <option value="${i}" selected>${i}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${i}">${i}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </select>
         </div>
     </div>
 </c:if>
 <c:if test="${services.size() == 0}">
-    <div style="text-align: center; font-size: 18px; margin: 50px; margin-top: 5px"><h3>There are no services found.</h3></div>
+    <div style="text-align: center; font-size: 18px; margin: 50px; margin-top: 5px"><h3><fmt:message
+            key="not_found"/></h3></div>
 </c:if>
 <div class="category">
     <c:forEach items="${services}" var="service">
@@ -30,7 +36,9 @@
             <div>
                     ${service.getName(defaultLocale)}
             </div>
-            <a href="/user/order-create?id=${service.id}"><fmt:message key="sign_up"/></a>
+            <div class="sign-btn">
+                <a href="/user/order-create?id=${service.id}"><fmt:message key="sign_up"/></a>
+            </div>
         </div>
     </c:forEach>
 </div>

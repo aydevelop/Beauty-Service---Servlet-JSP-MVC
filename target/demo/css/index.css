@@ -12,7 +12,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    margin: 0 140px;
+    margin: 0 auto;
+    width: 1220px;
 }
 
 .content {
@@ -49,16 +50,18 @@ a {
 .category {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 .category-item {
-    border: 2px solid red;
-    height: auto;
+    border: 1px solid red;
+    height: 150px;
     width: 300px;
     margin: 10px;
     text-align: center;
     padding-top: 40px;
     font-size: 26px;
+    border-radius: 20px;
 }
 
 .page-link {
@@ -74,4 +77,32 @@ button {
     color: white;
     padding: 10px 50px;
     cursor: pointer;
+}
+
+.sign-btn {
+    margin-top: 20px;
+}
+
+#services-list {
+    width: 100%;
+}
+
+#masters-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+#masters-list > div {
+    border: 1px solid red;
+    width: 360px;
+    padding-bottom: 15px;
+}
+
+#masters-list .rating {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
 }

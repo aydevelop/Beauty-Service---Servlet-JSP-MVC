@@ -24,7 +24,7 @@
         </tr>
         <c:forEach items="${orders}" var="order">
             <tr>
-                <td>${order.id}: </td>
+                <td>${order.id}:</td>
                 <td>${order.date}</td>
                 <td>${order.slot.name}</td>
                 <td width="80">
@@ -47,17 +47,16 @@
                 <td>${order.master.first_name} ${order.master.last_name}</td>
                 <td>${order.master.email}</td>
                 <td>
-                <button type="button">
+                    <button style="padding: 5px; min-width: 100px" type="button">
                         <a style="color: white; text-decoration: none" href="/admin/order-edit?id=${order.id}">
                             <b><fmt:message key="edit"/></b>
                         </a>
-                </button>
+                    </button>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </div>
-
 
 
 <%@include file="../../fragment/footer.jspf" %>

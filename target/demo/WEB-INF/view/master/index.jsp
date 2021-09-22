@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="title" value="Master" scope="page"/>
+<c:set var="pre_title" value='orders' scope="session"/>
+<%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="margin-top: 50px; margin-bottom: 50px;text-align: center">
@@ -25,7 +26,7 @@
         </tr>
         <c:forEach items="${orders}" var="order">
             <tr>
-                <td>${order.id}: </td>
+                <td>${order.id}:</td>
                 <td>${order.date}</td>
                 <td>${order.slot.name}</td>
                 <td width="80">
@@ -49,7 +50,8 @@
                     <c:if test="${order.status != 'is_done'}">
                         <form method="post" action="/master/order-done">
                             <input type="hidden" name="id" value="${order.id}">
-                            <button style="padding: 1px" type="submit"><b><fmt:message key="mark_as_done"/></b></button>
+                            <button style="padding: 5px; min-width: 100px" type="submit"><b>\u0437\u0430\u043c\u043e\u0432\u043b\u0435\u043d\u043d\u044f\u0020\u0432\u0438\u043a\u043e\u043d\u0430\u043d\u0435</b>
+                            </button>
                         </form>
                     </c:if>
                 </td>

@@ -28,8 +28,13 @@
 
     <context-param>
         <param-name>RecordsPerPage</param-name>
-        <param-value>3</param-value>
+        <param-value>5</param-value>
     </context-param>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
 
     <filter>
         <filter-name>EncodingFilter</filter-name>
@@ -41,6 +46,15 @@
     </filter>
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>ExceptionFilter</filter-name>
+        <filter-class>com.epam.beautyservice.filter.ExceptionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExceptionFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
@@ -57,7 +71,7 @@
         </init-param>
         <init-param>
             <param-name>client</param-name>
-            <param-value>/order-create</param-value>
+            <param-value>/user/order-create</param-value>
         </init-param>
     </filter>
     <filter-mapping>

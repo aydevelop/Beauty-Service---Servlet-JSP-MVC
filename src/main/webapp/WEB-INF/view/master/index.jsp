@@ -26,7 +26,7 @@
         </tr>
         <c:forEach items="${orders}" var="order">
             <tr>
-                <td>${order.id}: </td>
+                <td>${order.id}:</td>
                 <td>${order.date}</td>
                 <td>${order.slot.name}</td>
                 <td width="80">
@@ -50,7 +50,8 @@
                     <c:if test="${order.status != 'is_done'}">
                         <form method="post" action="/master/order-done">
                             <input type="hidden" name="id" value="${order.id}">
-                            <button style="padding: 1px" type="submit"><b><fmt:message key="mark_as_done"/></b></button>
+                            <button style="padding: 5px; min-width: 100px" type="submit"><b><fmt:message
+                                    key="mark_as_done"/></b></button>
                         </form>
                     </c:if>
                 </td>

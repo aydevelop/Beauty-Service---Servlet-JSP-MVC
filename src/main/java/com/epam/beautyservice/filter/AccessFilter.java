@@ -16,10 +16,9 @@ public class AccessFilter implements Filter {
     Map<String, String> protectedRoute = new HashMap<String, String>();
 
     public void init(FilterConfig config) throws ServletException {
-        //disabled for testing
-        //initRoute(config, "admin");
-        //initRoute(config, "master");
-        //initRoute(config, "client");
+        initRoute(config, "admin");
+        initRoute(config, "master");
+        initRoute(config, "client");
     }
 
     public void destroy() {

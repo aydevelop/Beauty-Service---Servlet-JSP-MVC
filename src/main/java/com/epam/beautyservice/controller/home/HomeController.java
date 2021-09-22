@@ -17,40 +17,43 @@ import java.io.IOException;
 
 @WebServlet(value = "/home/*")
 public class HomeController extends HttpServlet {
-    Logger logger = Logger.getLogger(HomeController.class);
-    Action action = null;
+    private final Logger logger = Logger.getLogger(HomeController.class);
+    private Action action = null;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String path = Router.parse(request.getPathInfo());
-
-        logger.info("HomeController doGet action");
+        logger.info(Router.format(path));
 
         switch (path) {
             case "lang-change":
+                logger.info("HomeLangChangeGetAction");
                 action = new HomeLangChangeGetAction(null, request, response);
                 break;
 
             default:
+                logger.info("HomeIndexGetAction");
                 action = new HomeIndexGetAction("home/index", request, response);
                 break;
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());
-
-        logger.info("HomeController doPost action");
+        logger.info(Router.format(path));
 
         switch (path) {
             case "master-sort":
+                logger.info("HomeMasterSortPostAction");
                 action = new HomeMasterSortPostAction(null, request, response);
                 break;
             case "service-sort":
+                logger.info("HomeServiceSortPostAction");
                 action = new HomeServiceSortPostAction(null, request, response);
                 break;
             default:
+                logger.info("redirect /home");
                 response.sendRedirect("/home");
                 break;
         }
@@ -59,9 +62,9 @@ public class HomeController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.service(req, resp);
-
         if (action != null) {
             action.execute();
+            logger.info("executed");
         }
     }
 }

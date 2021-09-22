@@ -18,4 +18,8 @@ public class Router {
         segment = "/" + segment;
         return segment;
     }
+
+    public static String format(String path) {
+        return "path " + (path.equals("") ? "/" : path);
+    }
 }
