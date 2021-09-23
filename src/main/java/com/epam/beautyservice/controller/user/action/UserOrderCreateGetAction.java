@@ -28,7 +28,6 @@ public class UserOrderCreateGetAction extends Base implements Action {
         request.setAttribute("service", service);
         request.setAttribute("masters", masters);
 
-
         view(view, request, response);
     }
 }

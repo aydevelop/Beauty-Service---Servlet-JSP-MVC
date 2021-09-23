@@ -8,7 +8,7 @@
 </div>
 <div style="display: flex; flex-direction: row">
     <div id="filters"
-         style="width: 240px; border: 1px solid black; border-radius: 20px; margin-right: 20px; padding-left: 20px; padding-right: 10px; padding-top:20px; margin-top: 10px">
+         style="font-size: 18px; width: 240px; border: 1px solid black; border-radius: 20px; margin-right: 20px; padding-left: 20px; padding-right: 10px; padding-top:20px; margin-top: 10px">
         <fmt:message key="categories"/>
         <div id="filter-category">
             <c:forEach items="${categories}" var="category">

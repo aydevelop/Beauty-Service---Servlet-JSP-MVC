@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS user
 
 CREATE TABLE IF NOT EXISTS category
 (
-    id   INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id      INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name_ua VARCHAR(40) NOT NULL,
     name_en VARCHAR(40) NOT NULL
 );
@@ -83,10 +83,10 @@ VALUES (1, 'Перукарські послуги', 'Hairdressing services '),
        (7, 'Масаж та СПА', 'Massage and spa ');
 
 INSERT INTO role (id, name)
-VALUES (1, 'Гість'),
-       (2, 'Клієнт'),
-       (3, 'Адміністратор'),
-       (4, 'Майстер');
+VALUES (1, 'guest'),
+       (2, 'client'),
+       (3, 'admin'),
+       (4, 'master');
 
 INSERT INTO service (id, name_ua, name_en, price, image, description_ua, description_en, category_id)
 VALUES (1, 'Освітлення коренів', 'Root lighting', 111.00, '111', 'Освітлення коренів ...........',
@@ -166,8 +166,8 @@ VALUES (1, '8:00-9:00'),
        (9, '17:00-18:00');
 
 
-INSERT INTO `order` (id, date, status, feedback_text, feedback_rating, client_id, master_id, service_id)
-VALUES (1, '2021-09-12', 'is_done', 'good', 5, 10, 7, 3),
-       (2, '2021-10-12', 'is_done', 'good', 5, 5, 7, 1),
-       (3, '2021-11-12', 'is_done', 'good', 5, 5, 7, 3);
+INSERT INTO `order` (id, date, status, client_id, master_id, service_id)
+VALUES (1, '2021-09-12', 'is_done', 10, 7, 3),
+       (2, '2021-10-12', 'is_done', 5, 7, 1),
+       (3, '2021-11-12', 'is_done', 5, 7, 3);
 

@@ -1,6 +1,8 @@
 package com.epam.beautyservice.controller.user;
 
 import com.epam.beautyservice.controller.Action;
+import com.epam.beautyservice.controller.user.action.UserFeedbackGetAction;
+import com.epam.beautyservice.controller.user.action.UserFeedbackPostAction;
 import com.epam.beautyservice.controller.user.action.UserOrderCreateGetAction;
 import com.epam.beautyservice.controller.user.action.UserOrderCreatePostAction;
 import com.epam.beautyservice.utils.Router;
@@ -28,6 +30,10 @@ public class UserController extends HttpServlet {
                 logger.info("UserOrderCreateGetAction");
                 action = new UserOrderCreateGetAction("user/order-create", request, response);
                 break;
+            case "order-feedback":
+                logger.info("UserFeedbackGetAction");
+                action = new UserFeedbackGetAction("user/feedback-create", request, response);
+                break;
             default:
                 logger.info("redirect /home");
                 response.sendRedirect("/home");
@@ -43,6 +49,10 @@ public class UserController extends HttpServlet {
             case "order-create":
                 logger.info("UserOrderCreatePostAction");
                 action = new UserOrderCreatePostAction(null, request, response);
+                break;
+            case "order-feedback":
+                logger.info("UserFeedbackGetAction");
+                action = new UserFeedbackPostAction(null, request, response);
                 break;
             default:
                 logger.info("redirect /home");

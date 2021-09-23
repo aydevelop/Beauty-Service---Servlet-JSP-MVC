@@ -1,5 +1,6 @@
 package com.epam.beautyservice.listener;
 
+import com.epam.beautyservice.utils.MailJob;
 import org.apache.log4j.PropertyConfigurator;
 
 import javax.servlet.ServletContext;
@@ -13,10 +14,14 @@ import javax.servlet.jsp.jstl.core.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @WebListener
 public class ContextListener implements ServletContextListener, HttpSessionListener {
-    String defaultLocale = "";
+    private String defaultLocale = "";
+    private ScheduledExecutorService scheduler;
 
     public ContextListener() {
     }
@@ -25,6 +30,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
         initLog4J(servletContext);
+        backgroundJobInit();
 
         String localesValue = servletContext.getInitParameter("Locales");
         if (localesValue != null && localesValue.isEmpty() == false) {
@@ -45,6 +51,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        scheduler.shutdownNow();
     }
 
     @Override
@@ -65,5 +72,10 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void backgroundJobInit() {
+        scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(new MailJob(), 0, 5, TimeUnit.SECONDS);
     }
 }

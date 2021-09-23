@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 @WebFilter(filterName = "Exception")
 public class ExceptionFilter implements Filter {
@@ -23,6 +24,10 @@ public class ExceptionFilter implements Filter {
             logger.error(ex.getMessage());
             ex.printStackTrace();
 
+            try {
+                ((HttpServletRequest) request).getRequestDispatcher("/500.jsp").forward(request, response);
+            } catch (Exception e) {
+            }
         }
     }
 }

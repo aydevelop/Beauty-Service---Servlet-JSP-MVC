@@ -106,3 +106,24 @@ button {
     font-size: 18px;
     font-weight: bold;
 }
+
+.feedback {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+    text-align: center;
+}
+
+.feedback button {
+    margin-top: 20px;
+}
+
+.feedback h2 {
+    margin-bottom: 10px;
+}
+
+.feedback textarea {
+    padding: 10px;
+}
