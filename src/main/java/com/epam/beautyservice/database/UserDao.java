@@ -10,11 +10,10 @@ import java.util.List;
 
 public class UserDao implements GeneralDao<User> {
     private static final String SQL_READ_All = "SELECT * FROM user";
-    private static final String SQL_READ = "SELECT * FROM user WHERE id=?";
     private static final String SQL_READ_BY_EMAIL = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE email=?";
     private static final String SQL_READ_MASTER = "SELECT * FROM user LEFT JOIN role ON role.id = user.role_id WHERE role.name = 'master'";
     private static final String SQL_READ_MASTER_BY_SERVICE = "SELECT user.* FROM user_service LEFT JOIN user ON user.id = user_service.master_id WHERE user_service.service_id=?";
-    
+
     private static final String SQL_READ_WITH_RATING = "SELECT user.*, SUM(`order`.feedback_rating) FROM user " +
             "LEFT JOIN `order` ON `order`.master_id = user.id " +
             "GROUP BY user.email " +
@@ -54,7 +53,6 @@ public class UserDao implements GeneralDao<User> {
         List<User> users = new ArrayList<>();
 
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_READ_MASTER_BY_SERVICE);
             pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -76,7 +74,6 @@ public class UserDao implements GeneralDao<User> {
     @Override
     public void create(User user) {
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_CREATE);
             int k = 1;
             pstmt.setString(k++, user.getEmail());
@@ -96,7 +93,6 @@ public class UserDao implements GeneralDao<User> {
 
     public void editLang(long id, String lang) {
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_EDIT_LANG);
             pstmt.setString(1, lang);
             pstmt.setLong(2, id);
@@ -114,7 +110,6 @@ public class UserDao implements GeneralDao<User> {
         User user = new User();
 
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_READ_BY_EMAIL);
             pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
@@ -130,9 +125,7 @@ public class UserDao implements GeneralDao<User> {
     }
 
     public List<User> queryAllWithRating() {
-        return query(SQL_READ_WITH_RATING, (user, rs) -> {
-            user.setRating(rs.getInt(8));
-        });
+        return query(SQL_READ_WITH_RATING, (user, rs) -> user.setRating(rs.getInt(8)));
     }
 
     private User getUser(ResultSet rs) throws SQLException {

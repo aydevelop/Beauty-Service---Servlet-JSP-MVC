@@ -58,7 +58,8 @@
         <label>Email : </label>
         <input type="text" placeholder="Email" name="email" value="${sessionScope.loginEmail}" required>
         <label><fmt:message key="password"/> : </label>
-        <input type="text" placeholder="<fmt:message key="password"/>" name="password" value="${sessionScope.loginPassword}" required>
+        <input type="password" placeholder="<fmt:message key="password"/>" name="password"
+               value="${sessionScope.loginPassword}" required>
         <button type="submit"><fmt:message key="login"/></button>
     </div>
 </form>

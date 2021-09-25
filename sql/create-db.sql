@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS role
     name VARCHAR(20) NOT NULL
 );
 
-# noinspection SqlNoDataSourceInspection
-
 CREATE TABLE IF NOT EXISTS user
 (
     id         INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -34,20 +32,18 @@ CREATE TABLE IF NOT EXISTS slot
     slot VARCHAR(40) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `service`
+CREATE TABLE IF NOT EXISTS service
 (
-    id             INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name_ua        VARCHAR(40)    NOT NULL,
-    name_en        VARCHAR(40)    NOT NULL,
-    price          DECIMAL(10, 2) NOT NULL,
-    image          VARCHAR(100)   NOT NULL,
-    description_ua VARCHAR(1000)  NOT NULL,
-    description_en VARCHAR(1000)  NOT NULL,
-    category_id    INT            NOT NULL,
+    id          INT            NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name_ua     VARCHAR(40)    NOT NULL,
+    name_en     VARCHAR(40)    NOT NULL,
+    price       DECIMAL(10, 2) NOT NULL,
+    image       VARCHAR(100)   NOT NULL,
+    category_id INT            NOT NULL,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS `user_service`
+CREATE TABLE IF NOT EXISTS user_service
 (
     id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     master_id  INT NOT NULL,
@@ -88,21 +84,14 @@ VALUES (1, 'guest'),
        (3, 'admin'),
        (4, 'master');
 
-INSERT INTO service (id, name_ua, name_en, price, image, description_ua, description_en, category_id)
-VALUES (1, 'Освітлення коренів', 'Root lighting', 111.00, '111', 'Освітлення коренів ...........',
-        'Root lighting ............', 1),
-       (2, 'Манікюр європейський необрізний', 'European untrimmed manicure ', 111.00, '111',
-        'Манікюр європейський необрізний ..........', 'European untrimmed manicure ..........', 2),
-       (3, 'Нарощуваня вій (об’єм 2D)', 'Eyelash extensions (2D volume)', 111.00, '111',
-        'Нарощуваня вій (об’єм 2D) ..........', 'Eyelash extensions .....', 5),
-       (4, 'Покриття нігтів гелем + гель-лак', 'Covering nails with gel + gel varnish', 111.00, '111',
-        ' Покриття нігтів гелем + гель-лак ..........', 'Covering nails with gel + gel varnish .....', 2),
-       (5, 'Татуаж брів (класичний)', 'Eyebrow tattoo (classic)', 111.00, '111', 'Татуаж брів (класичний) ..........',
-        'Eyebrow tattoo (classic)  .....', 3),
-       (6, 'Корекція татуажу брів', 'Eyebrow tattoo correction ', 111.00, '111', 'Корекція татуажу брів ..........',
-        'Eyebrow tattoo correction  .....', 6),
-       (7, 'Зняття + нарощування волосся 1 прядка', 'Eyelash extensions (2D volume)', 111.00, '111',
-        'Зняття + нарощування волосся 1 прядка ..........', 'Eyelash extensions .....', 7);
+INSERT INTO service (id, name_ua, name_en, price, image, category_id)
+VALUES (1, 'Освітлення коренів', 'Root lighting', 111.00, '230', 1),
+       (2, 'Манікюр європейський необрізний', 'European untrimmed manicure ', 111.00, '310', 2),
+       (3, 'Нарощуваня вій (об’єм 2D)', 'Eyelash extensions (2D volume)', 111.00, '180', 5),
+       (4, 'Покриття нігтів гелем + гель-лак', 'Covering nails with gel + gel varnish', 111.00, '120', 2),
+       (5, 'Татуаж брів (класичний)', 'Eyebrow tattoo (classic)', 111.00, '180', 3),
+       (6, 'Корекція татуажу брів', 'Eyebrow tattoo correction ', 111.00, '250', 6),
+       (7, 'Зняття + нарощування волосся 1 прядка', 'Eyelash extensions (2D volume)', 111.00, '380', 7);
 
 /*
     password=1234
@@ -167,7 +156,11 @@ VALUES (1, '8:00-9:00'),
 
 
 INSERT INTO `order` (id, date, status, client_id, master_id, service_id)
-VALUES (1, '2021-09-12', 'is_done', 10, 7, 3),
-       (2, '2021-10-12', 'is_done', 5, 7, 1),
+VALUES (1, '2021-09-12', 'is_paid', 10, 7, 3),
+       (2, '2021-10-12', 'is_paid', 5, 7, 1),
        (3, '2021-11-12', 'is_done', 5, 7, 3);
 
+INSERT INTO `order` (id, date, status, feedback_text, feedback_rating, client_id, master_id, service_id)
+VALUES (4, '2021-09-12', 'is_done', 'good', '4', 10, 2, 3),
+       (5, '2021-09-12', 'is_done', 'good', '5', 2, 2, 3),
+       (6, '2021-09-12', 'is_done', 'good', '5', 2, 1, 2);

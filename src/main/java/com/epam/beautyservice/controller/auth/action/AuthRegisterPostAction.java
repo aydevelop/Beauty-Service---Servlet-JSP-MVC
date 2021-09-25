@@ -4,6 +4,7 @@ import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.User;
 import com.epam.beautyservice.utils.Security;
+import com.epam.beautyservice.utils.Translate;
 import com.epam.beautyservice.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class AuthRegisterPostAction extends Base implements Action {
         session.setAttribute("registerLastName", lastName);
         session.setAttribute("registerEmail", email);
 
-        Validator validator = new Validator();
+        Validator validator = new Validator(session);
         validator.checkEmail(email);
         validator.checkName(firstName);
         validator.checkName(lastName);
@@ -43,7 +44,7 @@ public class AuthRegisterPostAction extends Base implements Action {
 
         User check = db.getUsers().findUserByEmail(email);
         if (check.getEmail() != null && check.getEmail().equals(email)) {
-            session.setAttribute("error", "Email:" + email + " already registered");
+            session.setAttribute("error", "Email:" + email + " " + Translate.get("already_registered", request.getSession()));
             redirect("/auth/register", request, response);
             return;
         }

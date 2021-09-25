@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDao implements GeneralDao<Category> {
-    private final String SQL_READ_All = "SELECT * FROM category";
-    private final String SQL_READ_BY_ID = "SELECT * FROM category WHERE id=?";
+    private static final String SQL_READ_All = "SELECT * FROM category";
 
     @Override
     public List<Category> query(String sql, ExtraMapper<Category> mapper) {
@@ -44,17 +43,17 @@ public class CategoryDao implements GeneralDao<Category> {
 
     @Override
     public Category findById(long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override
     public void create(Category element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override
     public void edit(long id, Category element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported");
     }
 
     private Category getCategory(ResultSet rs) throws SQLException {

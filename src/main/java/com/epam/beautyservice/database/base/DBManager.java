@@ -11,14 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBManager {
-
     private static final Logger log = Logger.getLogger(DBManager.class);
-
-
-    // //////////////////////////////////////////////////////////
-    // singleton
-    // //////////////////////////////////////////////////////////
-
     private static DBManager instance;
 
     public static synchronized DBManager getInstance() {
@@ -52,11 +45,6 @@ public class DBManager {
 
     private DBManager() {
     }
-
-
-    // //////////////////////////////////////////////////////////
-    // DB util methods
-    // //////////////////////////////////////////////////////////
 
     /**
      * Commits and close the given connection.

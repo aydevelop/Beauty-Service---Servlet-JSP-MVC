@@ -2,13 +2,22 @@
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div class="feedback">
-    <h2>
+    <h1>
         Feedback
-    </h2>
-    <form style="width: 500px" method="post" action="/user/order-feedback">
+    </h1>
+    <form style="margin-top: 20px; width: 500px" method="post" action="/user/order-feedback">
         <input type="hidden" name="id" value="${id}">
         <textarea name="feedback" cols="60" rows="5"></textarea>
         <div>
+            <select style="margin-top: 24px; font-size: 18px; padding: 1px 15px" name="grade">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div style="margin-top: 20px">
             <button type="submit">Send</button>
         </div>
     </form>

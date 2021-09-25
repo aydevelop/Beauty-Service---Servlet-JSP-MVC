@@ -10,8 +10,6 @@ public class Service extends Entity {
     private String name_en;
     private double price;
     private String image;
-    private String description_ua;
-    private String description_en;
     private String categoryId;
     private String masterIds;
 
@@ -60,22 +58,6 @@ public class Service extends Entity {
         this.image = image;
     }
 
-    public String getDescription_ua() {
-        return description_ua;
-    }
-
-    public void setDescription_ua(String description_ua) {
-        this.description_ua = description_ua;
-    }
-
-    public String getDescription_en() {
-        return description_en;
-    }
-
-    public void setDescription_en(String description_en) {
-        this.description_en = description_en;
-    }
-
     public String getCategoryId() {
         return categoryId;
     }
@@ -88,15 +70,6 @@ public class Service extends Entity {
         if (defaultLocale.equals("ua")) {
             return name_ua;
         }
-
         return name_en;
-    }
-
-    public String getDescription(String defaultLocale) {
-        if (defaultLocale.equals("ua")) {
-            return description_ua;
-        }
-
-        return description_en;
     }
 }

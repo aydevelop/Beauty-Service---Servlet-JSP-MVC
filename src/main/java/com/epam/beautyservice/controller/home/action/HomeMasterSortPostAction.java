@@ -30,6 +30,10 @@ public class HomeMasterSortPostAction extends Base implements Action {
                     masters = masters.stream().sorted(Comparator.comparing(User::getLast_name))
                             .collect(Collectors.toList());
                     break;
+                default:
+                    masters = masters.stream().sorted(Comparator.comparing(User::getRating).reversed())
+                            .collect(Collectors.toList());
+                    break;
             }
         }
 

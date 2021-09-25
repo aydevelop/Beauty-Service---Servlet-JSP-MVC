@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Security {
+    private Security() {
+    }
+
     private static String salt = "@uBtTj#k3j";
 
     public static String getSHA512Password(String password) {

@@ -8,6 +8,7 @@ public class EncodingFilter implements Filter {
 
     @Override
     public void destroy() {
+        //destroy filter
     }
 
     @Override
@@ -21,7 +22,6 @@ public class EncodingFilter implements Filter {
     }
 
     public void init(FilterConfig fConfig) throws ServletException {
-
         encoding = fConfig.getInitParameter("encoding");
     }
 }

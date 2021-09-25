@@ -3,6 +3,7 @@ package com.epam.beautyservice.controller.user.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Order;
+import com.epam.beautyservice.utils.Translate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ public class UserFeedbackPostAction extends Base implements Action {
         order.setFeedbackRating(grade);
         db.getOrders().edit(lId, order);
 
-        request.getSession().setAttribute("message", "Feedback sent");
+        request.getSession().setAttribute("message", Translate.get("feedback_sent", request.getSession()));
         response.sendRedirect("/home");
     }
 }

@@ -47,12 +47,12 @@ public class SlotDao implements GeneralDao<Slot> {
 
     @Override
     public void create(Slot element) {
-
+        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override
     public void edit(long id, Slot element) {
-
+        throw new UnsupportedOperationException("Not supported");
     }
 
     private Slot getSlot(ResultSet rs) throws SQLException {

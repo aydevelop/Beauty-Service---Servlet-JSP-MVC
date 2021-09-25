@@ -1,6 +1,7 @@
 package com.epam.beautyservice.filter;
 
 import com.epam.beautyservice.utils.Router;
+import com.epam.beautyservice.utils.Translate;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,15 +14,17 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 public class AccessFilter implements Filter {
-    Map<String, String> protectedRoute = new HashMap<String, String>();
+    Map<String, String> protectedRoute = new HashMap<>();
 
     public void init(FilterConfig config) throws ServletException {
         initRoute(config, "admin");
         initRoute(config, "master");
         initRoute(config, "client");
     }
-
+    
+    @Override
     public void destroy() {
+        //destroy filter
     }
 
     @Override
@@ -32,7 +35,8 @@ public class AccessFilter implements Filter {
         if (isAllowed(segment, request)) {
             chain.doFilter(request, response);
         } else {
-            ((HttpServletRequest) request).getSession().setAttribute("error", "Access is denied");
+            HttpSession session = ((HttpServletRequest) request).getSession();
+            session.setAttribute("error", Translate.get("access_denied", session));
             request.getRequestDispatcher("/auth/login").forward(request, response);
         }
     }
@@ -44,10 +48,8 @@ public class AccessFilter implements Filter {
             HttpSession session = ((HttpServletRequest) request).getSession(false);
             if (session != null) {
                 Object role = session.getAttribute("role");
-                if (role != null) {
-                    if (((String) role).equals(route)) {
-                        return true;
-                    }
+                if (role != null && (role).equals(route)) {
+                    return true;
                 }
             }
             return false;

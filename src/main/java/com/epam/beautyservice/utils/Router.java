@@ -1,6 +1,9 @@
 package com.epam.beautyservice.utils;
 
 public class Router {
+    private Router() {
+    }
+
     public static String parse(String url) {
         String result = "";
 

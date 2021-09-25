@@ -1,7 +1,7 @@
 package com.epam.beautyservice.model;
 
 public class Order extends Entity {
-    private final long serialVersionUID = 2322302708125348585L;
+    private static final long serialVersionUID = 2322302708125348585L;
     private String date;
     private String status;
     private String feedbackText;

@@ -18,10 +18,7 @@ public interface Action {
         try {
             logger.info("forward view " + path);
             req.getRequestDispatcher(path).forward(req, res);
-        } catch (ServletException ex) {
-            logger.error(ex.getMessage());
-            ex.printStackTrace();
-        } catch (IOException ex) {
+        } catch (ServletException | IOException ex) {
             logger.error(ex.getMessage());
             ex.printStackTrace();
         }
@@ -33,10 +30,7 @@ public interface Action {
         try {
             logger.info("forward fragment " + path);
             req.getRequestDispatcher(path).forward(req, res);
-        } catch (ServletException ex) {
-            logger.error(ex.getMessage());
-            ex.printStackTrace();
-        } catch (IOException ex) {
+        } catch (ServletException | IOException ex) {
             logger.error(ex.getMessage());
             ex.printStackTrace();
         }

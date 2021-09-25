@@ -20,15 +20,15 @@ public class HomeServiceSortPostAction extends Base implements Action {
 
     @Override
     public void execute() throws IOException {
-        List<String> categories = Parse("categories");
-        List<String> masters = Parse("masters");
+        List<String> categories = parse("categories");
+        List<String> masters = parse("masters");
         List<Service> services = db.getServices().queryAllWithMasterAndCategory();
 
-        if (categories.size() > 0) {
+        if (!categories.isEmpty()) {
             services = services.stream().filter(s -> categories.contains(s.getCategoryId())).collect(Collectors.toList());
         }
 
-        if (masters.size() > 0) {
+        if (!masters.isEmpty()) {
             services = services.stream().filter(s -> {
                 for (String master : masters) {
                     List<String> serviceMasters = s.getMasters();
@@ -45,7 +45,7 @@ public class HomeServiceSortPostAction extends Base implements Action {
         fragment("services", request, response);
     }
 
-    private List<String> Parse(String key) {
+    private List<String> parse(String key) {
         String line = request.getParameter(key);
         List<String> res = new ArrayList<>();
 

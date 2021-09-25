@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionFilter implements Filter {
     private final Logger logger = Logger.getLogger(ExceptionFilter.class);
 
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) {
+        //init filter
     }
 
+    @Override
     public void destroy() {
+        //destroy filter
     }
 
     @Override
@@ -27,6 +30,7 @@ public class ExceptionFilter implements Filter {
             try {
                 ((HttpServletRequest) request).getRequestDispatcher("/500.jsp").forward(request, response);
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

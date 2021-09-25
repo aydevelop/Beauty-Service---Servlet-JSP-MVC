@@ -4,7 +4,6 @@ import com.epam.beautyservice.database.base.ExtraMapper;
 import com.epam.beautyservice.database.base.GeneralDao;
 import com.epam.beautyservice.model.*;
 
-import javax.xml.catalog.Catalog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,6 @@ public class OrderDao implements GeneralDao<Order> {
         Order order = new Order();
 
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_READ_BY_ID);
             pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -102,7 +100,6 @@ public class OrderDao implements GeneralDao<Order> {
     @Override
     public void create(Order order) {
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_CREATE);
             int k = 1;
             pstmt.setString(k++, order.getDate());
@@ -113,18 +110,13 @@ public class OrderDao implements GeneralDao<Order> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        int stop = 10;
     }
 
     @Override
     public void edit(long id, Order order) {
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_EDIT);
             int k = 1;
-
-            Object getSlotId = order.getSlotId();
 
             pstmt.setString(k++, order.getDate());
             pstmt.setString(k++, order.getStatus());

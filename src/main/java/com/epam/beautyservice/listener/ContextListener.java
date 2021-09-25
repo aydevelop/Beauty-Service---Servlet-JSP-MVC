@@ -23,19 +23,18 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
     private String defaultLocale = "";
     private ScheduledExecutorService scheduler;
 
-    public ContextListener() {
-    }
-
     @Override
     public void contextInitialized(ServletContextEvent event) {
         ServletContext servletContext = event.getServletContext();
         initLog4J(servletContext);
-        backgroundJobInit();
+
+        String host = servletContext.getInitParameter("host");
+        backgroundJobInit(host);
 
         String localesValue = servletContext.getInitParameter("Locales");
         if (localesValue != null && localesValue.isEmpty() == false) {
 
-            List<String> locales = new ArrayList<String>();
+            List<String> locales = new ArrayList<>();
             StringTokenizer st = new StringTokenizer(localesValue);
             while (st.hasMoreTokens()) {
                 String localeName = st.nextToken();
@@ -43,7 +42,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
             }
 
             servletContext.setAttribute("locales", locales);
-            if (locales.size() > 0) {
+            if (!locales.isEmpty()) {
                 defaultLocale = locales.get(0);
             }
         }
@@ -63,7 +62,7 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
 
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-
+        //session destroyed
     }
 
     private void initLog4J(ServletContext servletContext) {
@@ -74,8 +73,8 @@ public class ContextListener implements ServletContextListener, HttpSessionListe
         }
     }
 
-    private void backgroundJobInit() {
+    private void backgroundJobInit(String host) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(new MailJob(), 0, 5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new MailJob(host), 0, 5, TimeUnit.SECONDS);
     }
 }

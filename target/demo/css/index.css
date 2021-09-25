@@ -55,13 +55,14 @@ a {
 
 .category-item {
     border: 1px solid red;
-    height: 150px;
     width: 300px;
     margin: 10px;
+    padding-bottom: 85px;
     text-align: center;
     padding-top: 40px;
     font-size: 26px;
     border-radius: 20px;
+    position: relative;
 }
 
 .page-link {
@@ -126,4 +127,20 @@ button {
 
 .feedback textarea {
     padding: 10px;
+}
+
+#alert_msg {
+    color: red;
+    font-size: 28px;
+    background-color: linen;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    padding: 45px 40px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

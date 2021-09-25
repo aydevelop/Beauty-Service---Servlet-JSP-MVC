@@ -19,6 +19,7 @@ public class AdminController extends HttpServlet {
     private final Logger logger = Logger.getLogger(AdminController.class);
     private Action action = null;
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String path = Router.parse(request.getPathInfo());
         logger.info(Router.format(path));
@@ -39,7 +40,7 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());
         logger.info(Router.format(path));
-        
+
         switch (path) {
             case "order-edit":
                 logger.info("AdminOrderEditPostAction");

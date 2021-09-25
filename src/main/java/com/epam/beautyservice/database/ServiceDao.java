@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ServiceDao implements GeneralDao<Service> {
     private static final String SQL_READ_All = "SELECT * FROM service";
-    private static final String SQL_READ = "SELECT * FROM service WHERE id=?";
     private static final String SQL_READ_BY_ID = "SELECT * FROM service WHERE service.id = ?";
     private static final String SQL_READ_All_WITH_MASTER_AND_CATEGORY = "SELECT service.*, category.name_ua, category.name_en, GROUP_CONCAT(user_service.master_id) " +
             " FROM service LEFT JOIN category ON service.category_id = category.id" +
@@ -55,7 +54,6 @@ public class ServiceDao implements GeneralDao<Service> {
         Service service = new Service();
 
         try (Connection con = manager.getConnection()) {
-            Statement st = con.createStatement();
             PreparedStatement pstmt = con.prepareStatement(SQL_READ_BY_ID);
             pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -71,12 +69,12 @@ public class ServiceDao implements GeneralDao<Service> {
 
     @Override
     public void create(Service element) {
-
+        throw new UnsupportedOperationException("Not supported");
     }
 
     @Override
     public void edit(long id, Service element) {
-
+        throw new UnsupportedOperationException("Not supported");
     }
 
     private Service getService(ResultSet rs) throws SQLException {
@@ -86,8 +84,6 @@ public class ServiceDao implements GeneralDao<Service> {
         item.setName_en(rs.getString("name_en"));
         item.setPrice(rs.getDouble("price"));
         item.setImage(rs.getString("image"));
-        item.setDescription_ua(rs.getString("description_ua"));
-        item.setDescription_en(rs.getString("description_en"));
         item.setCategoryId(rs.getString("category_id"));
         return item;
     }

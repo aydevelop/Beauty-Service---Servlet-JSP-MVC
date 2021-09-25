@@ -3,6 +3,7 @@ package com.epam.beautyservice.controller.admin.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Order;
+import com.epam.beautyservice.utils.Translate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class AdminOrderEditPostAction extends Base implements Action {
         order.setStatus(status);
         order.setSlotId(Integer.parseInt(slotId));
         db.getOrders().edit(Long.parseLong(id), order);
+        request.getSession().setAttribute("message", Translate.get("order_edited", request.getSession()));
 
         response.sendRedirect("/admin");
     }

@@ -9,9 +9,6 @@ import java.util.Calendar;
 public class FoundedTag extends SimpleTagSupport {
     private String year;
 
-    public FoundedTag() {
-    }
-
     public void setYear(String year) {
         this.year = year;
     }
@@ -21,7 +18,7 @@ public class FoundedTag extends SimpleTagSupport {
         try {
             getJspContext().getOut().write(year + " - " + Calendar.getInstance().get(Calendar.YEAR));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

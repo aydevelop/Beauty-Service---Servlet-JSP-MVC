@@ -1,11 +1,10 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
-<c:set var="pre_title" value='register' scope="session"/>
+<c:set var="pre_title" value='registration' scope="session"/>
 <%@ include file="/WEB-INF/fragment/fmt.jspf" %>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
-
 <div style="text-align: center; margin-top: 30px">
-    <h1>Register</h1>
+    <h1><fmt:message key="registration"/></h1>
 </div>
 <br/>
 

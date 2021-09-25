@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface GeneralDao<T> {
-    final DBManager manager = DBManager.getInstance();
+    DBManager manager = DBManager.getInstance();
 
     List<T> query(String sql, ExtraMapper<T> mapper);
 

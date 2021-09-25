@@ -3,6 +3,7 @@ package com.epam.beautyservice.controller.master.action;
 import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.Order;
+import com.epam.beautyservice.utils.Translate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,8 @@ public class MasterOrderDonePostAction extends Base implements Action {
         Order order = db.getOrders().findById(idl);
         order.setStatus("is_done");
         db.getOrders().edit(idl, order);
-        request.getSession().setAttribute("message", "The order with the id " + id + " is executed ");
+
+        request.getSession().setAttribute("message", Translate.get("order_fulfilled", request.getSession()));
         response.sendRedirect("/master");
     }
 }

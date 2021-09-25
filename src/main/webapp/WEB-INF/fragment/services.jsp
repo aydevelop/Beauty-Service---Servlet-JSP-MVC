@@ -2,9 +2,9 @@
 
 <c:if test="${services.size() > 0}">
     <div style="display: flex; justify-content: space-between">
-        <div>
+        <div style="margin-left: 20px; position: relative; top: 3px">
             <c:if test="${total != 0}">
-                <h3><fmt:message key="totals_services"/>: ${total} </h3>
+                <span style="font-size: 20px; font-weight: bold"><fmt:message key="totals_services"/>: ${total} </span>
             </c:if>
         </div>
         <div style="display: flex">
@@ -12,7 +12,7 @@
                 <fmt:message key="per_page"/>:
             </span>
             <select style="font-size: 22px" class="form-control" id="recordsPerPage" name="recordsPerPage">
-                <c:forEach begin="1" end="${recordsPerPage}" var="i">
+                <c:forEach begin="1" end="${recordsPerPageAll}" var="i">
                     <c:choose>
                         <c:when test="${recordsPerPage eq i}">
                             <option value="${i}" selected>${i}</option>
@@ -32,12 +32,19 @@
 </c:if>
 <div class="category">
     <c:forEach items="${services}" var="service">
-        <div class="category-item" style="position: relative">
+        <div class="category-item">
             <div>
                     ${service.getName(defaultLocale)}
             </div>
-            <div class="sign-btn">
-                <a href="/user/order-create?id=${service.id}"><fmt:message key="sign_up"/></a>
+            <div style="position: absolute; bottom: 0px; width: 100%">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin: 30px">
+                    <div style="font-weight: bold">
+                        $ ${service.getPrice()}
+                    </div>
+                    <div>
+                        <a href="/user/order-create?id=${service.id}"><fmt:message key="sign_up"/></a>
+                    </div>
+                </div>
             </div>
         </div>
     </c:forEach>

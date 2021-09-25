@@ -4,6 +4,7 @@ import com.epam.beautyservice.controller.Action;
 import com.epam.beautyservice.controller.Base;
 import com.epam.beautyservice.model.User;
 import com.epam.beautyservice.utils.Security;
+import com.epam.beautyservice.utils.Translate;
 import com.epam.beautyservice.utils.Validator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class AuthLoginPostAction extends Base implements Action {
         session.setAttribute("loginEmail", email);
         session.setAttribute("loginPassword", password);
 
-        Validator validator = new Validator();
+        Validator validator = new Validator(session);
         validator.checkEmail(email);
         validator.checkPassword(password);
 
@@ -40,7 +41,7 @@ public class AuthLoginPostAction extends Base implements Action {
 
         String hash = Security.getSHA512Password(password);
         if (user.getEmail() == null || !user.getPassword().equals(hash)) {
-            session.setAttribute("error", "Email address or password is incorrect ");
+            session.setAttribute("error", Translate.get("password_is_incorrect", request.getSession()));
             redirect("/auth/login", request, response);
             return;
         }
@@ -51,8 +52,6 @@ public class AuthLoginPostAction extends Base implements Action {
             Config.set(session, "javax.servlet.jsp.jstl.fmt.locale", user.getLang());
             session.setAttribute("defaultLocale", user.getLang());
         }
-
-        Object role = session.getAttribute("role");
 
         redirect("/home", request, response);
     }

@@ -55,6 +55,7 @@
 <div style="text-align: right; font-size: 22px; height: 30px">
     <fmt:message key="order_by"/>:
     <select id="master_select" style="font-size: 22px">
+        <option value="" selected disabled></option>
         <option value="rating"><fmt:message key="rating"/></option>
         <option value="first_name"><fmt:message key="first_name"/></option>
         <option value="last_name"><fmt:message key="last_name"/></option>

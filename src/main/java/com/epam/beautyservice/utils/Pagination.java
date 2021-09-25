@@ -7,14 +7,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Pagination {
+    private Pagination() {
+    }
+
     public static List<Service> Generation(HttpServletRequest request, List<Service> services) {
         request.setAttribute("total", services.size());
         int currentPage = 1;
         int recordsPerPage = 3;
+        int recordsPerPageAll = 3;
 
         String strPerPage = request.getServletContext().getInitParameter("RecordsPerPage");
         if (strPerPage != null) {
             recordsPerPage = Integer.parseInt(strPerPage);
+            recordsPerPageAll = Integer.parseInt(strPerPage);
         }
 
         String strRecordsPerPage = request.getParameter("recordsPerPage");
@@ -30,11 +35,11 @@ public class Pagination {
         int size = services.size();
         int nOfPages = size / recordsPerPage;
         if (nOfPages > 1) {
-            if(recordsPerPage != 1) {
+            if (recordsPerPage != 1) {
                 nOfPages++;
             }
-        }else{
-            if(size!=recordsPerPage) {
+        } else {
+            if (size != recordsPerPage) {
                 nOfPages++;
             }
         }
@@ -42,6 +47,7 @@ public class Pagination {
         request.setAttribute("noOfPages", nOfPages);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("recordsPerPage", recordsPerPage);
+        request.setAttribute("recordsPerPageAll", recordsPerPageAll);
         services = services.stream().skip((currentPage - 1) * recordsPerPage)
                 .limit(recordsPerPage).collect(Collectors.toList());
 
