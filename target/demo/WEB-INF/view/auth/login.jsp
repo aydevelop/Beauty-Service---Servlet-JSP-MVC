@@ -1,7 +1,6 @@
 <%@ include file="/WEB-INF/fragment/base.jspf" %>
 <c:set var="pre_title" value='login' scope="session"/>
 <%@ include file="/WEB-INF/fragment/fmt.jspf" %>
-<c:set var="title" value='123' scope="page"/>
 <%@ include file="/WEB-INF/fragment/header.jspf" %>
 
 <div style="text-align: center; margin-top: 30px">
@@ -59,8 +58,9 @@
         <label>Email : </label>
         <input type="text" placeholder="Email" name="email" value="${sessionScope.loginEmail}" required>
         <label><fmt:message key="password"/> : </label>
-        <input type="text" placeholder="<fmt:message key="password"/>" name="password" value="${sessionScope.loginPassword}" required>
-        <button type="submit"><fmt:message key="login"/></button>
+        <input type="password" placeholder="<fmt:message key="password"/>" name="password"
+               value="${sessionScope.loginPassword}" required>
+        <button type="submit"><span style="font-size: 18px"><fmt:message key="login"/></span></button>
     </div>
 </form>
 

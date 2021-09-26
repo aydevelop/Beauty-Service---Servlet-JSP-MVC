@@ -14,11 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Logic of work for a user with admin roles
+ */
 @WebServlet(value = "/admin/*")
 public class AdminController extends HttpServlet {
     private final Logger logger = Logger.getLogger(AdminController.class);
     private Action action = null;
 
+    /**
+     * Mapping get requests
+     *
+     * @param request
+     * @param response
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String path = Router.parse(request.getPathInfo());
@@ -36,6 +45,12 @@ public class AdminController extends HttpServlet {
         }
     }
 
+    /**
+     * Mapping post requests
+     *
+     * @param request
+     * @param response
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());

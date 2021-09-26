@@ -4,9 +4,12 @@ import javax.servlet.http.HttpSession;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Translating strings from resources
+ */
 public class Translate {
     private Translate() {
-        
+
     }
 
     public static String get(String line, HttpSession session) {

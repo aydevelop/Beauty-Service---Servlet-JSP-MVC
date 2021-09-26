@@ -1,0 +1,9 @@
+
+i
+java:S1989B"SHandle the following exception that could be thrown by "sendRedirect": IOException.(ÉŒåÍ
+z
+java:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Äñ¥Èûÿÿÿÿ8ûËÂŞÁ/
+f
+java:S1301$"KReplace this "switch" statement by "if" statements to increase readability.(œÈõ‹úÿÿÿÿ
+f
+java:S1301;"KReplace this "switch" statement by "if" statements to increase readability.(œÈõ‹úÿÿÿÿ

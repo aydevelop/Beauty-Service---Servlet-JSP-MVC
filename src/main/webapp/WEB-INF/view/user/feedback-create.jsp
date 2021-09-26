@@ -7,6 +7,7 @@
     </h1>
     <form style="margin-top: 20px; width: 500px" method="post" action="/user/order-feedback">
         <input type="hidden" name="id" value="${id}">
+        <input type="hidden" name="token" value="${token}">
         <textarea name="feedback" cols="60" rows="5"></textarea>
         <div>
             <select style="margin-top: 24px; font-size: 18px; padding: 1px 15px" name="grade">

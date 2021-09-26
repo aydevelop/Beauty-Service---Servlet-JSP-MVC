@@ -44,8 +44,8 @@ public class ServiceDao implements GeneralDao<Service> {
 
     public List<Service> queryAllWithMasterAndCategory() {
         return query(SQL_READ_All_WITH_MASTER_AND_CATEGORY, (service, st) -> {
-            service.setCategoryId(st.getString(8));
-            service.setMasterIds(st.getString(11));
+            service.setCategoryId(st.getString(6));
+            service.setMasterIds(st.getString(9));
         });
     }
 

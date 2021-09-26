@@ -32,13 +32,16 @@
                 <td width="80">
                     <c:choose>
                         <c:when test="${order.status == 'is_canceled'}">
-                            <p>Is-Canceled</p>
+                            <p>Canceled</p>
+                        </c:when>
+                        <c:when test="${order.status == 'is_new'}">
+                            <p>New</p>
                         </c:when>
                         <c:when test="${order.status == 'is_paid'}">
-                            <p>Is-Paid</p>
+                            <p>Paid</p>
                         </c:when>
                         <c:otherwise>
-                            <p>Is-Done</p>
+                            <p>Done</p>
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -47,7 +50,7 @@
                 <td>${order.client.first_name} ${order.client.last_name}</td>
                 <td>${order.client.email}</td>
                 <td width="150">
-                    <c:if test="${order.status != 'is_done'}">
+                    <c:if test="${order.status == 'is_paid'}">
                         <form method="post" action="/master/order-done">
                             <input type="hidden" name="id" value="${order.id}">
                             <button style="padding: 5px; min-width: 100px" type="submit"><b><fmt:message

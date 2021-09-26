@@ -85,12 +85,12 @@ VALUES (1, 'guest'),
        (4, 'master');
 
 INSERT INTO service (id, name_ua, name_en, price, image, category_id)
-VALUES (1, 'Освітлення коренів', 'Root lighting', 111.00, '230', 1),
-       (2, 'Манікюр європейський необрізний', 'European untrimmed manicure ', 111.00, '310', 2),
-       (3, 'Нарощуваня вій (об’єм 2D)', 'Eyelash extensions (2D volume)', 111.00, '180', 5),
-       (4, 'Покриття нігтів гелем + гель-лак', 'Covering nails with gel + gel varnish', 111.00, '120', 2),
-       (5, 'Татуаж брів (класичний)', 'Eyebrow tattoo (classic)', 111.00, '180', 3),
-       (6, 'Корекція татуажу брів', 'Eyebrow tattoo correction ', 111.00, '250', 6),
+VALUES (1, 'Освітлення коренів', 'Root lighting', 130.00, '230', 1),
+       (2, 'Манікюр європейський необрізний', 'European untrimmed manicure ', 240.00, '310', 2),
+       (3, 'Нарощуваня вій (об’єм 2D)', 'Eyelash extensions (2D volume)', 230.00, '180', 5),
+       (4, 'Покриття нігтів гелем + гель-лак', 'Covering nails with gel + gel varnish', 540.00, '120', 2),
+       (5, 'Татуаж брів (класичний)', 'Eyebrow tattoo (classic)', 120.00, '180', 3),
+       (6, 'Корекція татуажу брів', 'Eyebrow tattoo correction ', 420.00, '250', 6),
        (7, 'Зняття + нарощування волосся 1 прядка', 'Eyelash extensions (2D volume)', 111.00, '380', 7);
 
 /*

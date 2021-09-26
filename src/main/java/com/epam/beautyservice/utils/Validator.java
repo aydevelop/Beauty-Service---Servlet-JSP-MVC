@@ -7,6 +7,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+/**
+ * Validation code for user submitted data
+ */
 public class Validator {
     private static String DATE_FORMAT = "yyyy-MM-dd";
     private StringBuilder error = new StringBuilder();

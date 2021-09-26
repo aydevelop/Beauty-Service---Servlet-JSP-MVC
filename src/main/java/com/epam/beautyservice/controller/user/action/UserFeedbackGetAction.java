@@ -15,7 +15,9 @@ public class UserFeedbackGetAction extends Base implements Action {
     @Override
     public void execute() throws IOException {
         String id = request.getParameter("id");
+        String token = request.getParameter("token");
         request.setAttribute("id", id);
+        request.setAttribute("token", token);
 
         view(view, request, response);
     }

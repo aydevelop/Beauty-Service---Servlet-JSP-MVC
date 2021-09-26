@@ -15,11 +15,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Main page logic
+ */
 @WebServlet(value = "/home/*")
 public class HomeController extends HttpServlet {
     private final Logger logger = Logger.getLogger(HomeController.class);
     private Action action = null;
 
+    /**
+     * Mapping get requests
+     *
+     * @param request
+     * @param response
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String path = Router.parse(request.getPathInfo());
@@ -38,6 +47,13 @@ public class HomeController extends HttpServlet {
         }
     }
 
+    /**
+     * Mapping post requests
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());

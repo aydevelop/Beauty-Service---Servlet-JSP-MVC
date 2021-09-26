@@ -30,13 +30,16 @@
                 <td width="80">
                     <c:choose>
                         <c:when test="${order.status == 'is_canceled'}">
-                            <p>Is-Canceled</p>
+                            <p>Canceled</p>
+                        </c:when>
+                        <c:when test="${order.status == 'is_new'}">
+                            <p>New</p>
                         </c:when>
                         <c:when test="${order.status == 'is_paid'}">
-                            <p>Is-Paid</p>
+                            <p>Paid</p>
                         </c:when>
                         <c:otherwise>
-                            <p>Is-Done</p>
+                            <p>Done</p>
                         </c:otherwise>
                     </c:choose>
                 </td>

@@ -18,7 +18,8 @@ public class OrderDao implements GeneralDao<Order> {
             " LEFT JOIN user AS master ON master.id = `order`.master_id" +
             " LEFT JOIN service ON service.id = `order`.service_id" +
             " LEFT JOIN category ON category.id = service.category_id" +
-            " LEFT JOIN slot ON slot.id = order.slot_id";
+            " LEFT JOIN slot ON slot.id = order.slot_id" +
+            " ORDER BY `order`.date";
 
     private static final String SQL_EDIT = "UPDATE `order` SET date=?, status=?, feedback_text = ?, feedback_rating = ?, slot_id = ? where id=?";
     private static final String SQL_CREATE = "INSERT INTO `order` (date, client_id, master_id, service_id) VALUES (?, ?, ?, ?)";
@@ -52,15 +53,15 @@ public class OrderDao implements GeneralDao<Order> {
     public List<Order> queryAllWithUserServiceAndSlot() {
         return query(SQL_READ_All_WITH_USER_SERVICE, (order, rs) -> {
             User client = new User();
-            client.setEmail(rs.getString(20));
-            client.setFirst_name(rs.getString(21));
-            client.setLast_name(rs.getString(22));
+            client.setEmail(rs.getString(18));
+            client.setFirst_name(rs.getString(19));
+            client.setLast_name(rs.getString(20));
             order.setClient(client);
 
             User master = new User();
-            master.setEmail(rs.getString(23));
-            master.setFirst_name(rs.getString(24));
-            master.setLast_name(rs.getString(25));
+            master.setEmail(rs.getString(21));
+            master.setFirst_name(rs.getString(22));
+            master.setLast_name(rs.getString(23));
             order.setMaster(master);
 
             Service service = new Service();
@@ -69,12 +70,12 @@ public class OrderDao implements GeneralDao<Order> {
             order.setService(service);
 
             Category category = new Category();
-            category.setName_ua(rs.getString(27));
-            category.setName_en(rs.getString(28));
+            category.setName_ua(rs.getString(25));
+            category.setName_en(rs.getString(26));
             order.setCategory(category);
 
             Slot slot = new Slot();
-            slot.setName(rs.getString(19));
+            slot.setName(rs.getString(17));
             order.setSlot(slot);
         });
     }

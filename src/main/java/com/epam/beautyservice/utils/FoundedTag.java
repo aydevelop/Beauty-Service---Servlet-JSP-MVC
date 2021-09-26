@@ -6,6 +6,9 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.util.Calendar;
 
+/**
+ * Example of a custom tag
+ */
 public class FoundedTag extends SimpleTagSupport {
     private String year;
 

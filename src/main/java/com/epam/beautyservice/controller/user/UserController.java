@@ -15,11 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Logic of work for a user with user roles
+ */
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
     private final Logger logger = Logger.getLogger(UserController.class);
     private Action action = null;
 
+    /**
+     * Mapping get requests
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());
@@ -40,6 +50,13 @@ public class UserController extends HttpServlet {
         }
     }
 
+    /**
+     * Mapping post requests
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());

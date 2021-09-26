@@ -13,11 +13,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Logic of work for a user with master roles
+ */
 @WebServlet("/master/*")
 public class MasterController extends HttpServlet {
     private final Logger logger = Logger.getLogger(MasterController.class);
     private Action action = null;
 
+    /**
+     * Mapping get requests
+     *
+     * @param request
+     * @param response
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String path = Router.parse(request.getPathInfo());
@@ -31,8 +40,15 @@ public class MasterController extends HttpServlet {
         }
     }
 
+    /**
+     * Mapping post requests
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = Router.parse(request.getPathInfo());
         logger.info(Router.format(path));
 

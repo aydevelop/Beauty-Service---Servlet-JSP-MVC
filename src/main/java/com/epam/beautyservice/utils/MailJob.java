@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+/**
+ * Reminder that there is an opportunity to leave a review
+ */
 public class MailJob implements Runnable {
     private UnitOfWork db = new UnitOfWork();
     private final Logger logger = Logger.getLogger(MailJob.class);
@@ -35,7 +38,11 @@ public class MailJob implements Runnable {
         for (Order item : orders) {
             LocalDate orderCreationDate = LocalDate.parse(item.getDate());
             if (currentDateMinus1Days.isAfter(orderCreationDate)) {
-                sendEmail(host + "/user/order-feedback?id=" + item.getId(), item.getClient().getEmail());
+                String data = host + "/user/order-feedback?id=" + item.getId();
+                String email = item.getClient().getEmail();
+                data += "&token=" + Security.getSHA512Password(email);
+
+                sendEmail(data, item.getClient().getEmail());
                 item.setFeedbackRating("0");
                 db.getOrders().edit(item.getId(), item);
                 logger.info("send mail");
@@ -78,7 +85,7 @@ public class MailJob implements Runnable {
             message.setSubject("It is possible to leave a review ");
 
             // Now set the actual message
-            message.setText("<div style='text-align: center; margin: 15px;' >" + url + "</div>");
+            message.setText(url);
 
             // Send message
             Transport.send(message);

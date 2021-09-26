@@ -1,5 +1,8 @@
 package com.epam.beautyservice.utils;
 
+/**
+ * Helper for working with url
+ */
 public class Router {
     private Router() {
     }

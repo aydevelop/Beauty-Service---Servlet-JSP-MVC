@@ -60,7 +60,7 @@
         <label><fmt:message key="password"/> : </label>
         <input type="password" placeholder="<fmt:message key="password"/>" name="password"
                value="${sessionScope.loginPassword}" required>
-        <button type="submit"><fmt:message key="login"/></button>
+        <button type="submit"><span style="font-size: 18px"><fmt:message key="login"/></span></button>
     </div>
 </form>
 
